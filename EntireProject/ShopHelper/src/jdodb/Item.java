@@ -1,5 +1,6 @@
 package jdodb;
 
+import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.ForeignKey;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
@@ -10,22 +11,23 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class Item {
-	public Item(String name, Key type){
+	public Item(String name, String type){
 		setItemName(name);
 		typeID = type;
 	}
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key itemID;
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	private String itemID;
 	@Persistent
 	private String itemName;
 	@ForeignKey
 	@Persistent
-	private Key typeID;
+	private String typeID;
 	
 	
-	public Key getItemID(){return itemID;}
-	public Key getTypeID(){return typeID;}
+	public String getItemID(){return itemID;}
+	public String getTypeID(){return typeID;}
 	public String getItemName(){return itemName;}
 	
 	public void setItemName(String name){itemName=name;}

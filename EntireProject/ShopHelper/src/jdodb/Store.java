@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -19,7 +20,8 @@ public class Store {
 	}
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key storeID;
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	private String storeID;
 	@Persistent
 	private String storeName;
 	@Persistent
@@ -27,7 +29,7 @@ public class Store {
 	@Persistent
 	private int storeZIP;
 	
-	public Key getStoreID(){return storeID;}
+	public String getStoreID(){return storeID;}
 	public String getStoreName(){return storeName;}
 	public String getStoreStreet(){return storeStreet;}
 	public int getStoreZIP(){return storeZIP;}
@@ -42,7 +44,12 @@ public class Store {
 		query.setFilter("storeName == storen");
 		query.declareParameters("String storen");
 		List<Store> s1= (List<Store>)query.execute(storen);
-		Store s = s1.get(0); 
+		Store s = null;
+		try{
+			s = s1.get(0);
+		}catch(IndexOutOfBoundsException e){
+			s = null;
+		} 
 		query.closeAll();
 		return s;
 	}

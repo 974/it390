@@ -1,5 +1,6 @@
 package jdodb;
 
+import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -16,11 +17,12 @@ public class Template {
 	//add typeID to uml
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key typeID;
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	private String typeID;
 	@Persistent
 	private String itemType;
 	
-	public Key getTypeID(){return typeID;}
+	public String getTypeID(){return typeID;}
 	public String getItemType(){return itemType;}
 	
 	public void setItemType(String type){itemType = type;}

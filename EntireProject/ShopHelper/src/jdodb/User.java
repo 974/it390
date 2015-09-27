@@ -1,5 +1,6 @@
 package jdodb;
 
+import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -14,11 +15,12 @@ public class User {
 	}
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key userID;
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	private String userID;
 	@Persistent
 	private String userName;
 	
-	public Key getUserID(){return userID;}
+	public String getUserID(){return userID;}
 	public String getUserName(){return userName;}
 	
 	public void setUserName(String name){userName = name;}

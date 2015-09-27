@@ -1,5 +1,6 @@
 package jdodb;
 
+import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.ForeignKey;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
@@ -10,29 +11,30 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class Stock {
-	public Stock(double price, Key item, Key store){
+	public Stock(double price, String item, String store){
 		setItemPrice(price);
 		itemID = item;
 		storeID = store;
 	}
 	@ForeignKey
 	@Persistent
-	private Key itemID;
+	private String itemID;
 	@ForeignKey
 	@Persistent
-	private Key storeID;
+	private String storeID;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key combineStoreAndItemID;
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	private String combineStoreAndItemID;
 	@Persistent
 	private double itemPrice;
 	
-	public Key getItemID(){return itemID;}
-	public Key getStoreID(){return storeID;}
-	public Key getCombineStoreAndItemID(){return combineStoreAndItemID;}
+	public String getItemID(){return itemID;}
+	public String getStoreID(){return storeID;}
+	public String getCombineStoreAndItemID(){return combineStoreAndItemID;}
 	public double getItemPrice(){return itemPrice;}
 	
 	public void setItemPrice(double price){itemPrice = price;}
-	public void setStoreID(Key id){storeID = id;}
-	public void setItemID(Key id){itemID = id;}
+	public void setStoreID(String id){storeID = id;}
+	public void setItemID(String id){itemID = id;}
 }

@@ -5,12 +5,20 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet>
-		<servlet-name>ShopHelper</servlet-name>
+		<servlet-name>ShopHelperServlet</servlet-name>
 		<servlet-class>sh.ShopHelperServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ShopHelper</servlet-name>
-		<url-pattern>/shophelper</url-pattern>
+		<servlet-name>ShopHelperServlet</servlet-name>
+		<url-pattern>/ShopHelperServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LoadStartingData</servlet-name>
+		<servlet-class>sh.LoadStartingData</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoadStartingData</servlet-name>
+		<url-pattern>/LoadStartingData</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

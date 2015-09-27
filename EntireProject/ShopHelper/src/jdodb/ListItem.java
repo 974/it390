@@ -1,5 +1,6 @@
 package jdodb;
 
+import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.ForeignKey;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
@@ -10,22 +11,23 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class ListItem {
-	public ListItem(int quan, Key code){
+	public ListItem(int quan, String code){
 		setQuantity(quan);
 		combineStoreAndItemID = code;
 	}
 	@ForeignKey
 	@Persistent
-	private Key combineStoreAndItemID;
+	private String combineStoreAndItemID;
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key listID;
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	private String listID;
 	@Persistent
 	private int quantity;
 	
-	public Key getCombineStoreAndItemID(){return combineStoreAndItemID;}
-	public Key getListID(){return listID;}
+	public String getCombineStoreAndItemID(){return combineStoreAndItemID;}
+	public String getListID(){return listID;}
 	public int getQuantity(){return quantity;}
 	
 	public void setQuantity(int quan){quantity = quan;}

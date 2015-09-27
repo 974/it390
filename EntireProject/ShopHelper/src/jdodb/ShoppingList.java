@@ -3,6 +3,7 @@ package jdodb;
 import java.util.ArrayList;
 
 import javax.jdo.annotations.Element;
+import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.ForeignKey;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
@@ -13,7 +14,7 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class ShoppingList {
-	public ShoppingList(double bud, double total, Key user, ArrayList <ListItem>list){
+	public ShoppingList(double bud, double total, String user, ArrayList <ListItem>list){
 		setBudget(bud);
 		setTotalCost(total);
 		userID = user;
@@ -22,10 +23,11 @@ public class ShoppingList {
 	@ForeignKey
 	@Persistent
 	@Element(dependent = "true")
-	private Key userID;
+	private String userID;
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key shopListID;
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	private String shopListID;
 	@Persistent
 	private double budget;
 	@Persistent
@@ -35,8 +37,8 @@ public class ShoppingList {
 	@Persistent
 	private ArrayList <ListItem> shoppingList= new ArrayList<ListItem>();
 	
-	public Key getUserID(){return userID;}
-	public Key getShopListID(){return shopListID;}
+	public String getUserID(){return userID;}
+	public String getShopListID(){return shopListID;}
 	public ArrayList<ListItem> getShoppingList(){return shoppingList;}
 	public ListItem getItemFromShoppingList(int idx){return shoppingList.get(idx);}
 	public double getBudget(){return budget;}
