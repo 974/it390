@@ -8,10 +8,26 @@
 <body>
 <div ng-controller="shopHelper as shop"class="container">
   <h1>Shop Helper</h1>
-  <form name="listMaker">
-    Budget:<input ng-model="list.budget" type="text" name="budget">
+  
+  <h2>What are your shopping needs?</h2>
+  <form name="listMaker" ng-controller="userInput" ng-submit="">
+    <h3>Budget</h3>
+    <input ng-model="" type="text" name="budget">
+    </br></br>
+    <select name="options" ng-model="">
+      <option>Food</option>
+      <option>Clothing</option>
+      <option>Party</option>
+    </select>
+    </br></br>
     <button class="btn btn-default btn-lg" type="submit">Submit</button>
   </form>
+  
+  <h2>Your List:</h2>
+  <ul>
+    <li ng-repeat="item in items">{{item.itemName}} {{stock.setItemPrice}} {{store.storeName}} {{store.storeStreet}} {{store.storeZip}}</li>
+  </ul>
+  <h3>{{}}</h3>
   
 </div>
 </body>
