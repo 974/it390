@@ -1,24 +1,23 @@
 (function() {
-  var app = angular.module('myApp', [ ]);
+  var app = angular.module('myApp', []);
   
-  app.controller('shopHelper', function(){
+  app.controller('shopHelper', ['$http', function($http){
+    var list = this;
+    
+    list.food = [];
+    list.clothing = [];
+    list.data = [];
+    
+    $http.get('food.json').success(function(data){
+      list.food = data;
+    });
   
-  });
+    $http.get('clothing.json').success(function(data){
+      list.clothing = data;
+    });
   
-  app.controller('userInput', function(){
-
-  });
-  
-  var list [{
-    name: 'Cookies',
-    price: '3.00',
-    storeName: 'Wegmans',
-    storeAddress: 'address here'
-  },
-  {
-    name: 'Meat',
-    price: '5.00',
-    storeName: 'Giant',
-    storeAddress: 'address here'
-  },];
+    $http.get('party.json').success(function(data){
+      list.party = data;
+    });
+  }]);
 })();
