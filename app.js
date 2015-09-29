@@ -5,6 +5,10 @@
   
   });
   
+  app.controller('userInput', function(){
+
+  });
+  
   var list [{
     name: 'Cookies',
     price: '3.00',
