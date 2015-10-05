@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" data-ng-app>
 <head>
@@ -7,21 +6,36 @@
 <script src="serverRequests.js"></script>
 <script src="app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="shophelper.css">
 </head>
+
 <body>
 <div ng-app="app" ng-controller="shopHelper as shop" class="container">
-  <h1>Shop Helper</h1>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h3>Shop Helper</h3>
+    </div>
+  </div>
+</nav>
+
+  <div class="page header">
+    <h1>Shop Helper</h1>
+  </div>
   
   <h2>What are your shopping needs?</h2>
   <form name="listMaker" ng-submit="shopHelper.submitBudget(budget)">
-    <h3>Budget</h3>
-    <input ng-model="userBudget" type="text" name="budget">
-    </br></br>
+    <h3>Type</h3>
     <select name="options" ng-model="shopHelper.options">
       <option value="food">Food</option>
       <option value="clothing">Clothing</option>
       <option value="party">Party</option>
     </select>
+    </br></br>
+    <h3>Budget</h3>
+    <input ng-model="userBudget" type="text" name="budget">
     </br></br>
     <button class="btn btn-default btn-lg" type="submit">Submit</button>
     </br></br>
@@ -33,6 +47,13 @@
     <li ng-repeat="item in list.selected">{{item.itemName}} {{stock.setItemPrice}} {{store.storeName}} {{store.storeStreet}} {{store.storeZip}}</li>
   </ul>
   
+ <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-footer">
+
+    </div>
+  </div>
+</nav> 
 </div>
 </body>
 </html>
