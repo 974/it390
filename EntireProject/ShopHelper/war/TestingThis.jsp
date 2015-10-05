@@ -1,12 +1,14 @@
-
-<!DOCTYPE html>
-<html lang="en" data-ng-app>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@page import="jdodb.ShoppingList" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="serverRequests.js">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script src="app.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop Helper</title>
 </head>
 <body>
 <div ng-app="app" ng-controller="shopHelper as shop" class="container">
@@ -26,12 +28,30 @@
     </br></br>
     <button class="btn btn-default btn-lg" type="submit">Submit</button>
     </br></br>
-      <p>You selected {{shopHelper.options}} and your budget is {{shophelper.budget}}</p>
   </form>
   
   <h2>Your List:</h2>
   <ul>
-     <li ng-repeat="item in list.selected">{{item.itemName}} {{stock.setItemPrice}} {{store.storeName}} {{store.storeStreet}} {{store.storeZip}}</li>
+  <p>
+  <%
+  try{
+  ShoppingList s3 = (ShoppingList)request.getAttribute("outputList");
+  String s [] = s3.createStringOutputs();
+  for (int i = 0; i < s.length;i++){
+	  if (s[i] == null) break;
+	  %></br><% 
+	  out.println(s[i]);
+	  if (i == 0){%></br><% }
+
+  }
+  }
+  catch(NullPointerException e){
+	  e.printStackTrace();
+  }
+	 //<%=request.getAttribute("outputList")
+  %>
+ 
+  	</p>
   </form>
   </ul>
   
