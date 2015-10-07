@@ -12,8 +12,10 @@
 </head>
 
 <body>
+
 <div ng-app="app" ng-controller="shopHelper as shop" class="container">
-<nav class="navbar navbar-default">
+
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <h3>Shop Helper</h3>
@@ -46,14 +48,12 @@
   <ul>
     <li ng-repeat="item in list.selected">{{item.itemName}} {{stock.setItemPrice}} {{store.storeName}} {{store.storeStreet}} {{store.storeZip}}</br></br></li>
   </ul>
-  
- <nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <div class="navbar-footer">
 
     </div>
   </div>
 </nav> 
-</div>
 </body>
 </html>
