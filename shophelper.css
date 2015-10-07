@@ -1,12 +1,9 @@
 body {
   font-family: 'Raleway', sans-serif;
   text-align: center;
-  background-color:#fdb;
-}
-
-.container {
   background-color:#fff;
   background-image:url('lined_paper_@2X.png');
+  padding-top: 70px; 
 }
 
 h1, h2, h3 {
