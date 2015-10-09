@@ -47,7 +47,9 @@ public class ShopHelperServlet extends HttpServlet {
 			System.out.println("Error!");
 		}
 		try{
-			double num = Double.parseDouble(req.getParameter("budget"));
+			String convertMe = req.getParameter("budget").trim();
+			if ((convertMe == null) || convertMe.equals("")){convertMe = "0";}
+			double num = Double.parseDouble(convertMe);
 		}catch(NumberFormatException e){
 			e.printStackTrace();
 		}

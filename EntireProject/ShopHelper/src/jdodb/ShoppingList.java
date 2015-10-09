@@ -63,7 +63,7 @@ public class ShoppingList {
 		int counter = 0;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		String displayStrings [] = new String[MAX_LINES];
-		displayStrings[counter++] =  "Budget:$" + budget + "     Type: " + type + "\n";
+		displayStrings[counter++] =  "Budget:$" + budget + " Type: " + type + "\n";
 		//String displayMe = "Budget:$" + budget + "     Type: " + type + "\n";
 		String JSONVer;
 		JSONObject obj = new JSONObject();
@@ -85,7 +85,7 @@ public class ShoppingList {
 				Query findItemName = pm.newQuery("select from " +Item.class.getName() + " where itemID == findMe");
 				findItemName.declareParameters("String findMe");
 				List <Item> results1 = (List<Item>)findItemName.execute(s1.getItemID());
-				displayStrings[counter] = "Item name: " +results1.get(0).getItemName() + "       Price per item: $" + s1.getItemPrice() + "       Quantity: " + i.getQuantity();
+				displayStrings[counter] = "Item name: " +results1.get(0).getItemName() + ";Price per item: $" + s1.getItemPrice() + ";Quantity: " + i.getQuantity();
 				try {
 					obj.put("itemname" + stringIncr, results1.get(0).getItemName());
 					obj.put("itemprice" + stringIncr, s1.getItemPrice());
@@ -97,7 +97,7 @@ public class ShoppingList {
 				Query findItemStore = pm.newQuery("select from " + Store.class.getName() + " where storeID == findMe");
 				findItemStore.declareParameters("String findMe");
 				List <Store> results2 = (List<Store>)findItemStore.execute(s1.getStoreID());
-				displayStrings[counter] += "        Store name: " + results2.get(0).getStoreName() + "\n";
+				displayStrings[counter] += ";Store name: " + results2.get(0).getStoreName() + "\n";
 				counter++;
 				try {
 					obj.put("storename" + stringIncr, results2.get(0).getStoreName());

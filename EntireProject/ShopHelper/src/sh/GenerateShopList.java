@@ -19,7 +19,40 @@ public class GenerateShopList {
 		ShoppingList s = new ShoppingList();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		String typeIDWeNeed = null;
-		
+		//new
+		String name = "";
+		if (type.equalsIgnoreCase("thanksgiving dinner")){
+			if (budget < 80){
+				name = "Bloom";
+			}else if(budget >= 80 && budget< 115){
+				name = "Giant";
+			}else if (budget >= 115){
+				name = "Wegmans";
+			}
+		}else if (type.equalsIgnoreCase("continental breakfast")){
+			if (budget < 30){
+				name = "Bloom";
+			}else if(budget >= 30 && budget< 75){
+				name = "Giant";
+			}else if (budget >= 75){
+				name = "Wegmans";
+			}	
+		}else if (type.equalsIgnoreCase("halloween party")){
+			if (budget < 35){
+				name = "Bloom";
+			}else if(budget >= 35 && budget< 80){
+				name = "Giant";
+			}else if (budget >= 80){
+				name = "Wegmans";
+			}	
+		}else if (type.equalsIgnoreCase("back to school clothes")){
+			name = "Macy's";
+		}
+		//new
+		Query findStoreID = pm.newQuery("select from " + Store.class.getName() + " where storeName == findMe");
+		findStoreID .declareParameters("String findMe");
+		List <Store> r10 = (List<Store>)findStoreID .execute(name);
+		String idForStore = r10.get(0).getStoreID();
 		//Find the typeID primary key to find all items with this type.
 		javax.jdo.Extent<jdodb.Template> extent1 = pm.getExtent(jdodb.Template.class, false);
 		for (jdodb.Template me : extent1) {
@@ -44,11 +77,17 @@ public class GenerateShopList {
 		javax.jdo.Extent<Stock> extent3 = pm.getExtent(Stock.class, false);
 		ArrayList <Stock> itemsToGenerateFromReduced = new <Stock>ArrayList();
 		for (Stock me : extent3) {
+			if (me.getStoreID().equalsIgnoreCase(idForStore)){
+				
+			
 			for (Item examineMe:  itemsToGenerateFrom){
+				//changed to take store into account
+				
 				if (me.getItemID().equalsIgnoreCase(examineMe.getItemID())){
 					itemsToGenerateFromReduced.add(me);
 				}
 			}
+		}
 		}
 		extent3.closeAll();
 	
@@ -61,7 +100,16 @@ public class GenerateShopList {
 		while((total < budget) && !itemsToGenerateFromReduced.isEmpty()){
 			int randNumItem = (int)(Math.random()*itemsToGenerateFromReduced.size());
 			//Max Quantity of 3
-			int randNumQuan = (int)(Math.random()*3+1);
+			int randNumQuan = 0;
+			if (type.equalsIgnoreCase("thanksgiving dinner")){
+				randNumQuan = (int)(Math.random()*2+1);
+			}else if (type.equalsIgnoreCase("continental breakfast")){
+				randNumQuan = (int)(Math.random()*3+1);
+			}else if (type.equalsIgnoreCase("halloween party")){
+				randNumQuan = (int)(Math.random()*3+1);
+			}else if (type.equalsIgnoreCase("back to school clothes")){
+				randNumQuan = (int)(Math.random()*2+1);
+			}
 			double costForItem = randNumQuan * (itemsToGenerateFromReduced.get(randNumItem).getItemPrice());
 			String itemIDToRemove = null;
 			//Check to see if the quantity makes the total go over the budget
