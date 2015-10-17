@@ -1,13 +1,13 @@
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Trebuchet MS', sans-serif;
   text-align: center;
   background-color:#fff;
   background-image:url('lined_paper_@2X.png');
   padding-top: 70px; 
 }
 
-h1, h2, h3 {
-  font-family: 'Quicksand', sans-serif;
+h1, h2, h3{
+  font-family: 'Trebuchet MS', sans-serif;
 }
 
 .navbar {

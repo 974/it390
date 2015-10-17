@@ -17,11 +17,14 @@ import jdodb.Stock;
 import jdodb.Store;
 import jdodb.Template;
 import jdodb.User;
-import java.util.List;
-import javax.jdo.Query;
 
-public class LoadStartingData {
-	public static void loadData(){
+import java.util.List;
+
+import javax.jdo.Query;
+import javax.servlet.http.HttpServlet;
+
+public class LoadStartingData extends HttpServlet{
+	public static void loadData() {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try{
@@ -33,10 +36,10 @@ public class LoadStartingData {
 			pm.makePersistent(s1);
 			pm.makePersistent(s2);
 			pm.makePersistent(s4);
-			Template t = new Template("continental breakfast");
-			Template t1 = new Template("thanksgiving dinner");
-			Template t2 = new Template("back to school cloths");
-			Template t3 = new Template("halloween party");
+			Template t = new Template("continental breakfast2");
+			Template t1 = new Template("thanksgiving dinner5");
+			Template t2 = new Template("back to school clothes2");
+			Template t3 = new Template("halloween party5");
 			pm.makePersistent(t);
 			pm.makePersistent(t1);			
 			pm.makePersistent(t2);
@@ -85,55 +88,112 @@ public class LoadStartingData {
 			pm.makePersistent(i16);
 			pm.makePersistent(cloth1);
 			pm.makePersistent(cloth2);
-			Stock as = new Stock(25,i.getItemID(),s2.getStoreID());
-			Stock as1 = new Stock(30,i.getItemID(),s.getStoreID());
-			Stock as2 = new Stock(40,i.getItemID(),s1.getStoreID());
-			Stock as3 = new Stock(4,i13.getItemID(),s2.getStoreID());
-			Stock as4 = new Stock(5,i13.getItemID(),s.getStoreID());
-			Stock as5 = new Stock(6,i13.getItemID(),s1.getStoreID());
-			Stock as6 = new Stock(5,i1.getItemID(),s2.getStoreID());
-			Stock as7 = new Stock(9,i1.getItemID(),s1.getStoreID());
-			Stock as8 = new Stock(7,i1.getItemID(),s.getStoreID());
-			Stock as9 = new Stock(4,i2.getItemID(),s.getStoreID());
-			Stock as10 = new Stock(5,i2.getItemID(),s1.getStoreID());
-			Stock as11 = new Stock(4,i3.getItemID(),s1.getStoreID());
-			Stock as12 = new Stock(3,i3.getItemID(),s2.getStoreID());
-			Stock as13 = new Stock(2,i3.getItemID(),s.getStoreID());
-			Stock as14 = new Stock(7,i4.getItemID(),s1.getStoreID());
-			Stock as15 = new Stock(5,i4.getItemID(),s.getStoreID());
-			Stock as16 = new Stock(4.5,i4.getItemID(),s2.getStoreID());
-			Stock as17 = new Stock(5,i5.getItemID(),s.getStoreID());
-			Stock as18 = new Stock(6,i5.getItemID(),s1.getStoreID());
-			Stock as19 = new Stock(5,i5.getItemID(),s2.getStoreID());
-			Stock as20= new Stock(5,i6.getItemID(),s.getStoreID());
-			Stock as21 = new Stock(4,i6.getItemID(),s2.getStoreID());
-			Stock as22 = new Stock(15,i7.getItemID(),s4.getStoreID());
-			Stock as23 = new Stock(25,i8.getItemID(),s4.getStoreID());
-			Stock as24 = new Stock(5,i9.getItemID(),s.getStoreID());
-			Stock as25 = new Stock(6,i9.getItemID(),s1.getStoreID());
-			Stock as26 = new Stock(4.5,i9.getItemID(),s2.getStoreID());
-			Stock as27 = new Stock(5,i10.getItemID(),s.getStoreID());
-			Stock as28 = new Stock(6,i10.getItemID(),s1.getStoreID());
-			Stock as29 = new Stock(4,i10.getItemID(),s2.getStoreID());
-			Stock as30 = new Stock(20,i11.getItemID(),s2.getStoreID());
-			Stock as31 = new Stock(25,i11.getItemID(),s.getStoreID());
-			Stock as32 = new Stock(27,i11.getItemID(),s1.getStoreID());
-			Stock as33 = new Stock(10,i12.getItemID(),s.getStoreID());
-			Stock as34 = new Stock(15,i12.getItemID(),s1.getStoreID());
-			Stock as35 = new Stock(8,i12.getItemID(),s2.getStoreID());
-			Stock as36 = new Stock(5,pty1.getItemID(),s.getStoreID());
-			Stock as37 = new Stock(4,pty1.getItemID(),s2.getStoreID());
-			Stock as38 = new Stock(10,i14.getItemID(),s.getStoreID());
-			Stock as39 = new Stock(15,i14.getItemID(),s1.getStoreID());
-			Stock as40 = new Stock(13,i14.getItemID(),s.getStoreID());
-			Stock as41 = new Stock(15,cloth1.getItemID(),s4.getStoreID());
-			Stock as42 = new Stock(17,cloth2.getItemID(),s4.getStoreID());
-			Stock as43 = new Stock(4,i15.getItemID(),s2.getStoreID());
-			Stock as44 = new Stock(5,i15.getItemID(),s.getStoreID());
-			Stock as45 = new Stock(6,i15.getItemID(),s1.getStoreID());
-			Stock as46 = new Stock(8,i16.getItemID(),s1.getStoreID());
-			Stock as47 = new Stock(7,i16.getItemID(),s.getStoreID());
-			Stock as48 = new Stock(6.5,i16.getItemID(),s2.getStoreID());
+			
+			double data [] = {25,23,26,27,20};
+			Stock as = new Stock(i.getItemID(),s2.getStoreID(),data,data.length);
+			double data1 [] = {29,30,26,27,28};
+			Stock as1 = new Stock(i.getItemID(),s.getStoreID(),data1,data1.length);
+			double data2 [] = {56,45,50,48,47};
+			Stock as2 = new Stock(i.getItemID(),s1.getStoreID(),data2,data2.length);
+			double data3 [] = {5,8,2,3,4};
+			Stock as3 = new Stock(i13.getItemID(),s2.getStoreID(),data3,data3.length);
+			double data4 [] = {5,2,2,3,4,9};
+			Stock as4 = new Stock(i13.getItemID(),s2.getStoreID(),data4,data4.length);
+			double data5 [] = {5,8,2,3,4,10,5};
+			Stock as5 = new Stock(i13.getItemID(),s1.getStoreID(),data5,data5.length);
+			double data6 [] = {5,8,2,3,4};
+			Stock as6 = new Stock(i1.getItemID(),s2.getStoreID(),data6,data6.length);
+			double data7 [] = {5,6,2,3,4,10,10,8,9};
+			Stock as7 = new Stock(i1.getItemID(),s1.getStoreID(),data7,data7.length);
+			double data8 [] = {5,8,2,3,4,5,7,7};
+			Stock as8 = new Stock(i1.getItemID(),s.getStoreID(),data8,data8.length);
+			double data9 [] = {3,6,7,2,2,2,3,4};
+			Stock as9 = new Stock(i2.getItemID(),s.getStoreID(),data9,data9.length);
+			double data10 [] = {5,8,2,3,4,5,7,7,9,7};
+			Stock as10 = new Stock(i2.getItemID(),s1.getStoreID(),data10,data10.length);
+			
+			double data11 [] = {2,5,4,2,3,4,5,4,4};
+			Stock as11 = new Stock(i3.getItemID(),s1.getStoreID(),data11,data11.length);
+			double data12 [] = {2,5,3,3,3,3,3,2,2,4,5};
+			Stock as12 = new Stock(i3.getItemID(),s2.getStoreID(),data12,data12.length);
+			double data13 [] = {2,2,2,2,4,3,3,2};
+			Stock as13 = new Stock(i3.getItemID(),s.getStoreID(),data13,data13.length);
+			double data14 [] = {8,9,6,13,6,8,5,4};
+			Stock as14 = new Stock(i4.getItemID(),s1.getStoreID(),data14,data14.length);
+			double data15 [] = {8,9,6,9,6,8,5,4,5,5,5};
+			Stock as15 = new Stock(i4.getItemID(),s.getStoreID(),data15,data15.length);
+			double data16 [] = {4,4,4,5,4,5,6,7,4,3,5};
+			Stock as16 = new Stock(i4.getItemID(),s2.getStoreID(),data16,data16.length);
+			double data17 [] = {4,4,4,5,4,5,6,7,4,3,5,5,4};
+			Stock as17 = new Stock(i5.getItemID(),s.getStoreID(),data17,data17.length);
+			double data18 [] = {4,4,4,5,4,5,6,7,4,3,5,9,6,5};
+			Stock as18 = new Stock(i5.getItemID(),s1.getStoreID(),data18,data18.length);
+			double data19 [] = {4,4,4,5,4,5,6,7,4,3,5,9,4,2,2};
+			Stock as19 = new Stock(i5.getItemID(),s2.getStoreID(),data19,data19.length);
+			double data20 [] = {4,4,4,5,4,5,6,7,4,3,5};
+			Stock as20= new Stock(i6.getItemID(),s.getStoreID(),data20,data20.length);
+			
+			double data21 [] = {4,4,4,5,4,5,6,7,4,3,5};
+			Stock as21 = new Stock(i6.getItemID(),s2.getStoreID(),data21,data21.length);
+			double data22 [] = {15,15,15,25,14,13,14};
+			Stock as22 = new Stock(i7.getItemID(),s4.getStoreID(),data22,data22.length);
+			double data23 [] = {25,24,29,24,23,24.5};
+			Stock as23 = new Stock(i8.getItemID(),s4.getStoreID(),data23,data23.length);
+			double data24 [] = {4,4,4,5,4,5,6,7,4,3,5};
+			Stock as24 = new Stock(i9.getItemID(),s.getStoreID(),data24,data24.length);
+			double data25 [] = {4,4,4,5,4,5,6,7,4,3,5,9,6,6,6};
+			Stock as25 = new Stock(i9.getItemID(),s1.getStoreID(),data25,data25.length);
+			double data26 [] = {4,4,4,5,4,5,6,7,4,3,5};
+			Stock as26 = new Stock(i9.getItemID(),s2.getStoreID(),data26,data26.length);
+			double data27 [] = {4,4,4,5,4,5,6,7,4,3,5};
+			Stock as27 = new Stock(i10.getItemID(),s.getStoreID(),data27,data27.length);
+			double data28 [] = {4,4,4,5,4,5,6,7,4,3,5,6,6,6,6,6};
+			Stock as28 = new Stock(i10.getItemID(),s1.getStoreID(),data28,data28.length);
+			double data29 [] = {4,4,4,5,4,5,6,7,4,3,5,4,4,4,4,3,3,3,3.5};
+			Stock as29 = new Stock(i10.getItemID(),s2.getStoreID(),data29,data29.length);
+			double data30 [] = {20,20,20,20,15,15,25,25,19};
+			Stock as30 = new Stock(i11.getItemID(),s2.getStoreID(),data30,data30.length);
+			
+			
+			double data31 [] = {25,25,25,25,20,20,29,27,26};
+			Stock as31 = new Stock(i11.getItemID(),s.getStoreID(),data31,data31.length);
+			double data32 [] = {25,25,25,27,27,26,28,29,30};
+			Stock as32 = new Stock(i11.getItemID(),s1.getStoreID(),data32,data32.length);
+			double data33 [] = {10,10,10,9,8,13,13};
+			Stock as33 = new Stock(i12.getItemID(),s.getStoreID(),data33,data33.length);
+			double data34 [] = {15,15,15,14,13,19,16,14.5};
+			Stock as34 = new Stock(i12.getItemID(),s1.getStoreID(),data34,data34.length);
+			double data35 [] = {8,8,8,7,6,9,11};
+			Stock as35 = new Stock(i12.getItemID(),s2.getStoreID(),data35,data35.length);
+			double data36 [] = {5,5,5,5,5,4,4,4,4,9,9,6,6,5.5};
+			Stock as36 = new Stock(pty1.getItemID(),s.getStoreID(),data36,data36.length);
+			double data37 [] = {4,4,4,3,3,3,2,2,5,5,6,7,9};
+			Stock as37 = new Stock(pty1.getItemID(),s2.getStoreID(),data37,data37.length);
+			double data38 [] = {10,10,10,15,8,9.5,9};
+			Stock as38 = new Stock(i14.getItemID(),s.getStoreID(),data38,data38.length);
+			double data39 [] = {15,15,15,15,20,13,13};
+			Stock as39 = new Stock(i14.getItemID(),s1.getStoreID(),data39,data39.length);
+			double data40 [] = {13,13,13,12,9,19,14};
+			Stock as40 = new Stock(i14.getItemID(),s.getStoreID(),data40,data40.length);
+			
+			double data41 [] = {13,13,13,12,9,19,14,15,15};
+			Stock as41 = new Stock(cloth1.getItemID(),s4.getStoreID(),data41,data41.length);
+			double data42 [] = {13,13,13,12,9,19,14,17,17,17};
+			Stock as42 = new Stock(cloth2.getItemID(),s4.getStoreID(),data42,data42.length);
+			double data43 [] = {4,4,4,3,3,2,9,5,5,4};
+			Stock as43 = new Stock(i15.getItemID(),s2.getStoreID(),data43,data43.length);
+			double data44 [] = {5,5,5,5,4,4,3,2,2,5};
+			Stock as44 = new Stock(i15.getItemID(),s.getStoreID(),data44,data44.length);
+			double data45 [] = {6,6,6,4,5,2,4,5,9,5,5};
+			Stock as45 = new Stock(i15.getItemID(),s1.getStoreID(),data45,data45.length);
+			double data46[] = {8,8,8,7,7,9,10,9};
+			Stock as46 = new Stock(i16.getItemID(),s1.getStoreID(),data46,data46.length);
+			double data47[] = {7,7,7,7,7,6,5,10,8,7,7};
+			Stock as47 = new Stock(i16.getItemID(),s.getStoreID(),data47,data47.length);
+			double data48 [] = {6,6,6,6,6.5,8,9,10,4,4,4};
+			Stock as48 = new Stock(i16.getItemID(),s2.getStoreID(),data48,data48.length);
+			
+			
 			pm.makePersistent(as);			
 			pm.makePersistent(as1);			
 			pm.makePersistent(as2);			

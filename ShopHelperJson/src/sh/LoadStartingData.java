@@ -17,10 +17,13 @@ import jdodb.Stock;
 import jdodb.Store;
 import jdodb.Template;
 import jdodb.User;
-import java.util.List;
-import javax.jdo.Query;
 
-public class LoadStartingData {
+import java.util.List;
+
+import javax.jdo.Query;
+import javax.servlet.http.HttpServlet;
+
+public class LoadStartingData  extends HttpServlet {
 	public static void loadData(){
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();

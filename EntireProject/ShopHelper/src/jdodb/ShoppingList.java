@@ -63,7 +63,8 @@ public class ShoppingList {
 		int counter = 0;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		String displayStrings [] = new String[MAX_LINES];
-		displayStrings[counter++] =  "Budget:$" + budget + " Type: " + type + "\n";
+		displayStrings[counter++] =  "Budget:$" + budget + "\n";
+		displayStrings[counter++] =  "Type: " + type + "\n";
 		//String displayMe = "Budget:$" + budget + "     Type: " + type + "\n";
 		String JSONVer;
 		JSONObject obj = new JSONObject();
@@ -85,10 +86,12 @@ public class ShoppingList {
 				Query findItemName = pm.newQuery("select from " +Item.class.getName() + " where itemID == findMe");
 				findItemName.declareParameters("String findMe");
 				List <Item> results1 = (List<Item>)findItemName.execute(s1.getItemID());
-				displayStrings[counter] = "Item name: " +results1.get(0).getItemName() + ";Price per item: $" + s1.getItemPrice() + ";Quantity: " + i.getQuantity();
+				//Changed from s1.getItemPrice() to s1.getItemAveragePrice()
+				displayStrings[counter] = "Item name: " +results1.get(0).getItemName() + ";Average Reported Price: $" + String.format("%.2f", s1.getItemAveragePrice()) + ";Quantity: " + i.getQuantity();
 				try {
 					obj.put("itemname" + stringIncr, results1.get(0).getItemName());
-					obj.put("itemprice" + stringIncr, s1.getItemPrice());
+					//Changed from s1.getItemPrice() to s1.getItemAveragePrice()
+					obj.put("itemprice" + stringIncr, s1.getItemAveragePrice());
 					obj.put("itemquantity" + stringIncr, i.getQuantity());
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -107,7 +110,7 @@ public class ShoppingList {
 				stringIncr++;
 			}
 		}
-		displayStrings[counter++] = "Total: $" + totalCost + "\n";
+		displayStrings[counter++] = "Total: $" + String.format("%.2f",totalCost) + "\n";
 		pm.close();
 		//return obj.toString();
 		//return displayMe;

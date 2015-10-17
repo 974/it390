@@ -58,12 +58,15 @@ public class ShoppingList {
 	public void addItemToShoppingList(ListItem item){shoppingList.add(item);}
 	public void setType(String t){type = t;}
 	
-	public String [] createStringOutputs(){
+	public List <String> createStringOutputs(){
+		List <String> shopList = new ArrayList <String>();
 		final int MAX_LINES = 500;
 		int counter = 0;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		String displayStrings [] = new String[MAX_LINES];
-		displayStrings[counter++] =  "Budget:$" + budget + " Type: " + type + "\n";
+		displayStrings[counter] =  "Budget:$" + budget + " Type: " + type + "\n";
+		shopList.add(displayStrings[counter]);
+		counter++;
 		//String displayMe = "Budget:$" + budget + "     Type: " + type + "\n";
 		String JSONVer;
 		JSONObject obj = new JSONObject();
@@ -86,6 +89,7 @@ public class ShoppingList {
 				findItemName.declareParameters("String findMe");
 				List <Item> results1 = (List<Item>)findItemName.execute(s1.getItemID());
 				displayStrings[counter] = "Item name: " +results1.get(0).getItemName() + ";Price per item: $" + s1.getItemPrice() + ";Quantity: " + i.getQuantity();
+				shopList.add(displayStrings[counter]);
 				try {
 					obj.put("itemname" + stringIncr, results1.get(0).getItemName());
 					obj.put("itemprice" + stringIncr, s1.getItemPrice());
@@ -98,6 +102,7 @@ public class ShoppingList {
 				findItemStore.declareParameters("String findMe");
 				List <Store> results2 = (List<Store>)findItemStore.execute(s1.getStoreID());
 				displayStrings[counter] += ";Store name: " + results2.get(0).getStoreName() + "\n";
+				shopList.add(displayStrings[counter]);
 				counter++;
 				try {
 					obj.put("storename" + stringIncr, results2.get(0).getStoreName());
@@ -107,11 +112,14 @@ public class ShoppingList {
 				stringIncr++;
 			}
 		}
-		displayStrings[counter++] = "Total: $" + totalCost + "\n";
+		displayStrings[counter] = "Total: $" + totalCost + "\n";
+		shopList.add(displayStrings[counter]);
+		counter++;
 		pm.close();
 		//return obj.toString();
 		//return displayMe;
-		return displayStrings;
+		//return displayStrings;
+		return shopList;
 		
 	}
 }

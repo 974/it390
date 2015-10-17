@@ -17,9 +17,10 @@ public class ShopHelperServletJSON extends HttpServlet {
 		try{
 
 			if(element != null && element.equals("listInfo")){
-				System.out.println(element);
-				//result.put("budget", null);
-				//result.put("type", null);
+				String budget= request.getParameter("budget");
+				String type= request.getParameter("type");
+				result.put("budget", budget);
+				result.put("type",type);
 			}
 		}catch(JSONException e){
 			e.printStackTrace();

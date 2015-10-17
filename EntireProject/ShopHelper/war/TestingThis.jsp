@@ -32,10 +32,10 @@
    <form action ="/ShopHelperServlet" method="post" name="listMaker" ng-submit="shopHelper.submitBudget(budget)">
     <h3>Type</h3>
     <select name="options" ng-model="shopHelper.options">
-       <option value="continental breakfast">Continental Breakfast</option>
-      <option value="thanksgiving dinner">Thanksgiving Dinner</option>
-      <option value="back to school clothes">Back-to-school Clothes</option>
-      <option value="halloween party">Halloween party</option>
+       <option value="continental breakfast2">Continental Breakfast (~2 people)</option>
+      <option value="thanksgiving dinner5">Thanksgiving Dinner(~5 people)</option>
+      <option value="back to school clothes2">Back-to-school Clothes(~2 people)</option>
+      <option value="halloween party5">Halloween party(~5 people)</option>
     </select>
     </br></br>
     <h3>Budget</h3>
@@ -48,7 +48,6 @@
 
   
   <h2>Your List:</h2>
-  <ul>
   <p>
   <table class = "table table-condensed">
   		  <thead><tr>
@@ -58,7 +57,7 @@
 		  %></th>
 		  <th class="text-center"><%
 
-		  out.println("Price");
+		  out.println("Average Reported Price");
 		  %></th>
 		  <th class="text-center"><%
 
@@ -78,8 +77,21 @@
 		  idx= i;
 		  break;
 	  }
-	  if (i == 0){
-		  %><h4><%out.println(s[i]); %></h4><%
+	  if (i == 0 || i == 1){
+		  if(i == 1){
+			  String typeOut = s[i].trim();
+			  if(typeOut.equalsIgnoreCase("Type: thanksgiving dinner5")){
+				  %><h4><%out.println("Type: Thanksgiving Dinner (~5 people)");%></h4><%
+			  }else if (typeOut.equalsIgnoreCase("Type: continental breakfast2")){
+				  %><h4><% out.println("Type: Continental Breakfast (~2 people)"); %></h4><%
+			  }else if(typeOut.equalsIgnoreCase("Type: halloween party5")){
+				  %><h4><% out.println("Type: Halloween Party (~5 people)");%></h4><%
+			  }else if(typeOut.equalsIgnoreCase("Type: back to school clothes2")){
+				  %><h4><% out.println("Type: Back-to-school Clothes (~2 people)");%></h4><%
+			  }
+		  }else{
+			  %><h4><%out.println(s[i]); %></h4><%
+		  }
 		  continue;
 	  }
 	  %><tr><%
@@ -92,7 +104,7 @@
 	  %></td><%
 	  %><td><%
 		  String k = scanMe.next().trim();
-		  k = k.substring(17,k.length());
+		  k = k.substring(23,k.length());
 		  out.println(k);
 	  %></td><%
 	  %><td><%
@@ -119,7 +131,6 @@
  
  </p>
   </form>
-  </ul>
   <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <div class="navbar-footer">
