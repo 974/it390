@@ -54,8 +54,38 @@ public class Stock {
 		itemPrices[counter] = price;
 		counter++;
 		double total = 0;
+		double midValue = itemPrices[itemPrices.length/2];
+		double difference = 0;
+		if(midValue >= 0 && midValue <=15){
+			difference = midValue - 5;
+		}else if(midValue >= 15 && midValue < 50){
+			difference = midValue - 9;
+		}else if(midValue >= 50 && midValue < 100){
+			difference = midValue - 12;
+		}else if(midValue >=100 && midValue < 150){
+			difference = midValue - 17;
+		}else if(midValue >= 150){
+			difference = midValue - 22;
+		}
 		for (int i = 0; i < counter; i++){
-			total += itemPrices[counter];
+		    double calcDiff = 0;
+			if(midValue >= 0 && midValue <=15){
+				calcDiff= itemPrices[i] - 5;
+				if(calcDiff > difference) continue;
+			}else if(midValue >= 15 && midValue < 50){
+				calcDiff= itemPrices[i] - 9;
+				if(calcDiff > difference) continue;
+			}else if(midValue >= 50 && midValue < 100){
+				calcDiff = itemPrices[i] - 12;
+				if(calcDiff > difference) continue;
+			}else if(midValue >=100 && midValue < 150){
+				calcDiff = itemPrices[i] - 17;
+				if(calcDiff > difference) continue;
+			}else if(midValue >= 150){
+				calcDiff = itemPrices[i] - 22;
+				if(calcDiff > difference) continue;
+			}	
+			total += itemPrices[i];
 		}
 		itemAveragePrice = total/counter;
 	}

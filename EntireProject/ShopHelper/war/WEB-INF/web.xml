@@ -20,6 +20,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>LoadStartingData</servlet-name>
 		<url-pattern>/LoadStartingData</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<servlet-name>ReportEntryServlet</servlet-name>
+		<servlet-class>sh.ReportEntryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReportEntryServlet</servlet-name>
+		<url-pattern>/ReportEntryServlet</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>TestingThis.jsp</welcome-file>
 	</welcome-file-list>

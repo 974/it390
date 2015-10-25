@@ -21,7 +21,8 @@
   <nav class="navbar navbar-default navbar-fixed-top"">
   <div class="container-fluid">
     <div class="navbar-header">
-      <h3>Shop Helper</h3>
+      <h3><a href="TestingThis.jsp">Shop Helper</a></h3>
+      <h4 align="right"><a href="ReportEntryPage.jsp">Report price</a></h4>
     </div>
   </div>
 </nav>
@@ -57,7 +58,7 @@
 		  %></th>
 		  <th class="text-center"><%
 
-		  out.println("Average Reported Price");
+		  out.println("Mean Price");
 		  %></th>
 		  <th class="text-center"><%
 
