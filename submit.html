@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="serverRequests.js"></script>
+<script src="app.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="shophelper.css">
+</head>
+<body>
+<div ng-app="app" ng-controller="shopHelper as shop" class="container">
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="container-fluid">
+<div class="navbar-header">
+<h3>Shop Helper</h3>
+</div>
+<ul class="nav navbar-nav">
+  <li>Home</li>
+  <li>Report Price</li>
+  <li>Budget Shopping</li>
+</ul>
+</div>
+</nav>
+<div class="page header">
+<h1>Shop Helper</h1>
+</div>
+<h2>Submit an item</h2>
+<form name="submitItem" ng-submit="shopHelper.submitItem(item)">
+<h3>Item Price</h3>
+<input ng-model="itemPrice" type="text" name="price">
+</br></br>
+<h3>Store Name</h3>
+<input ng-model="storeName" type="text" name="name">
+</br></br>
+<button class="btn btn-default btn-lg" type="submit">Submit</button>
+</form>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+<div class="container-fluid">
+<div class="navbar-footer">
+</div>
+</div>
+</nav>
+</body>
+</html>
