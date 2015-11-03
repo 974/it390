@@ -4,6 +4,7 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
 	<servlet>
 		<servlet-name>ShopHelperServlet</servlet-name>
 		<servlet-class>sh.ShopHelperServlet</servlet-class>
@@ -12,6 +13,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>ShopHelperServlet</servlet-name>
 		<url-pattern>/ShopHelperServlet</url-pattern>
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>LoadStartingData</servlet-name>
 		<servlet-class>sh.LoadStartingData</servlet-class>
@@ -20,15 +22,28 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>LoadStartingData</servlet-name>
 		<url-pattern>/LoadStartingData</url-pattern>
 	</servlet-mapping>
-		<servlet>
+	
+	<servlet>
 		<servlet-name>ReportEntryServlet</servlet-name>
 		<servlet-class>sh.ReportEntryServlet</servlet-class>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>ReportEntryServlet</servlet-name>
 		<url-pattern>/ReportEntryServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ReportEntryStoreServlet</servlet-name>
+		<servlet-class>sh.ReportEntryStoreServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ReportEntryStoreServlet</servlet-name>
+		<url-pattern>/ReportEntryStoreServlet</url-pattern>
+	</servlet-mapping>
+
 	<welcome-file-list>
-		<welcome-file>TestingThis.jsp</welcome-file>
+		<welcome-file>HomePage.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

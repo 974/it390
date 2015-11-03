@@ -19,3 +19,29 @@ h1, h2, h3{
   background-color:#5af;
   color:#fff;
 }
+a {
+	padding: 10px 30px;
+    color: White;
+}
+a:link {
+    color: White;
+}
+
+
+a:visited {
+    color: White;
+}
+hr {  border-top: 1px solid red;}
+
+a:hover {
+    color: White;
+}
+
+
+a:active {
+    color:White;
+}
+
+
+
+

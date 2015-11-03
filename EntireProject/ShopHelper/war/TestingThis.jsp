@@ -17,36 +17,44 @@
 <title>Shop Helper</title>
 </head>
 <body>
-<div ng-app="app" ng-controller="shopHelper as shop" class="container">
-  <nav class="navbar navbar-default navbar-fixed-top"">
+<div class="container">
+  <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <h3><a href="TestingThis.jsp">Shop Helper</a></h3>
-      <h4 align="right"><a href="ReportEntryPage.jsp">Report price</a></h4>
+      <h2 align="left"><a href="HomePage.jsp">Shop Helper</a></h2>
+      <ul class="nav navbar-nav">
+      	<li><h4 align="center"><a href="HomePage.jsp">Home</a></h4></li>
+      	<li> <h4 align="center"><a href="TestingThis.jsp">Budget Shopping</a></h4></li>
+      	<li><h4 align="center"><a href="ReportEntryPage.jsp">Report price</a></h4></li>
+      </ul>
+
     </div>
   </div>
 </nav>
-    <div class="page header">
-    <h1>Shop Helper</h1>
-  </div>
-  <h2>What are your shopping needs?</h2>
+<br>
+<div>
+  
    <form action ="/ShopHelperServlet" method="post" name="listMaker" ng-submit="shopHelper.submitBudget(budget)">
+    <h2>What are your shopping needs?</h2>
     <h3>Type</h3>
+    <font size="4">
     <select name="options" ng-model="shopHelper.options">
-       <option value="continental breakfast2">Continental Breakfast (~2 people)</option>
-      <option value="thanksgiving dinner5">Thanksgiving Dinner(~5 people)</option>
+       <option value="continental breakfast2">Continental Breakfast for one week(~2 people)</option>
+      <option value="thanksgiving dinner10">Thanksgiving Dinner(~10 people)</option>
       <option value="back to school clothes2">Back-to-school Clothes(~2 people)</option>
       <option value="halloween party5">Halloween party(~5 people)</option>
-    </select>
+    </select></font>
     </br></br>
     <h3>Budget</h3>
-    <input ng-model="userBudget" type="text" name="budget">
+    <font size="4">
+    <input ng-model="userBudget" type="text" name="budget" autocomplete="off"></font>
+    
     </br></br>
     <button class="btn btn-default btn-lg" type="submit">Submit</button>
     </br></br>
     
   </form>
-
+</div>
   
   <h2>Your List:</h2>
   <p>
@@ -81,10 +89,10 @@
 	  if (i == 0 || i == 1){
 		  if(i == 1){
 			  String typeOut = s[i].trim();
-			  if(typeOut.equalsIgnoreCase("Type: thanksgiving dinner5")){
-				  %><h4><%out.println("Type: Thanksgiving Dinner (~5 people)");%></h4><%
+			  if(typeOut.equalsIgnoreCase("Type: thanksgiving dinner10")){
+				  %><h4><%out.println("Type: Thanksgiving Dinner (~10 people)");%></h4><%
 			  }else if (typeOut.equalsIgnoreCase("Type: continental breakfast2")){
-				  %><h4><% out.println("Type: Continental Breakfast (~2 people)"); %></h4><%
+				  %><h4><% out.println("Type: Continental Breakfast for one week(~2 people)"); %></h4><%
 			  }else if(typeOut.equalsIgnoreCase("Type: halloween party5")){
 				  %><h4><% out.println("Type: Halloween Party (~5 people)");%></h4><%
 			  }else if(typeOut.equalsIgnoreCase("Type: back to school clothes2")){

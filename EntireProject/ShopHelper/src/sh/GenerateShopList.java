@@ -21,7 +21,7 @@ public class GenerateShopList {
 		String typeIDWeNeed = null;
 		//new
 		String name = "";
-		if (type.equalsIgnoreCase("thanksgiving dinner5")){
+		if (type.equalsIgnoreCase("thanksgiving dinner10")){
 			if (budget < 80){
 				name = "Bloom";
 			}else if(budget >= 80 && budget< 115){
@@ -101,10 +101,10 @@ public class GenerateShopList {
 			int randNumItem = (int)(Math.random()*itemsToGenerateFromReduced.size());
 			//Max Quantity of 3
 			int randNumQuan = 0;
-			if (type.equalsIgnoreCase("thanksgiving dinner5")){
+			if (type.equalsIgnoreCase("thanksgiving dinner10")){
 				randNumQuan = (int)(Math.random()*2+1);
 			}else if (type.equalsIgnoreCase("continental breakfast2")){
-				randNumQuan = (int)(Math.random()*3+1);
+				randNumQuan = (int)(Math.random()*2+1);
 			}else if (type.equalsIgnoreCase("halloween party5")){
 				randNumQuan = (int)(Math.random()*3+1);
 			}else if (type.equalsIgnoreCase("back to school clothes2")){
@@ -120,7 +120,8 @@ public class GenerateShopList {
 				itemIDToRemove = itemsToGenerateFromReduced.get(randNumItem).getItemID();
 				itemsToGenerateFromReduced.remove(randNumItem);
 				removeItemFromReducedList(itemIDToRemove, itemsToGenerateFromReduced);
-			}else{
+			}else{                  
+				
 				boolean goodQuan = false;
 				//Reduce quantity to see if we can find a suitable quantity
 				for (int i = randNumQuan; i > 0 && !goodQuan;i--){

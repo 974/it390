@@ -22,6 +22,16 @@ public class ReportEntry {
 	@Persistent
 	private double reportedPrice;
 	
+	public ReportEntry(String combinedKey){
+		combineStoreAndItemID = combinedKey;
+		userID = null;
+		reportedPrice = 0;
+	}
+	public ReportEntry(String combinedKey, String userID, double reportedPrice){
+		this.combineStoreAndItemID = combinedKey;
+		this.userID = userID;
+		this.reportedPrice = reportedPrice;
+	}
 	public String getUserID(){
 		return userID;
 	}

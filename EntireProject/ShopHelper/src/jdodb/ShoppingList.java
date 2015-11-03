@@ -87,7 +87,7 @@ public class ShoppingList {
 				findItemName.declareParameters("String findMe");
 				List <Item> results1 = (List<Item>)findItemName.execute(s1.getItemID());
 				//Changed from s1.getItemPrice() to s1.getItemAveragePrice()
-				displayStrings[counter] = "Item name: " +results1.get(0).getItemName() + ";Average Reported Price: $" + String.format("%.1f", s1.getItemAveragePrice()) + ";Quantity: " + i.getQuantity();
+				displayStrings[counter] = "Item name: " +results1.get(0).getItemName() + ";Average Reported Price: $" + String.format("%.2f", s1.getItemAveragePrice()) + ";Quantity: " + i.getQuantity();
 				try {
 					obj.put("itemname" + stringIncr, results1.get(0).getItemName());
 					//Changed from s1.getItemPrice() to s1.getItemAveragePrice()

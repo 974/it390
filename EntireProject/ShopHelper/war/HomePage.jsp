@@ -20,8 +20,7 @@
 <title>Shop Helper</title>
 </head>
 <body>
-<div class="container">
-  <nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <h2 align="left"><a href="HomePage.jsp">Shop Helper</a></h2>
@@ -34,33 +33,19 @@
     </div>
   </div>
 </nav>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <h4>Under Construction</h4>
+<h2 align="center">Shopping Made Easy</h2>
+<br>  
 
+<h3>Get started by choosing one of the below options from the navigation bar:</h3>
 
-  <br>
-<div>
-
-<form action ="/ReportEntryStoreServlet" method="post" name="listMaker">
-<h2>Report a price</h2>
-    <h3>Enter the Shop first</h3>
-    <font size="4">
-    <select name="store">
-    	<%
-    	PersistenceManager pm = PMF.get().getPersistenceManager();
-		javax.jdo.Extent<jdodb.Store> extent1 = pm.getExtent(jdodb.Store.class, false);
-		for (Store me1 : extent1) {
-    		%><option value="<% out.print(me1.getStoreID());%>"><% out.print(me1.getStoreName());%></option><%	
-		}
-		extent1.closeAll();
-     	%>
-      
-    </select>
-    </font>
-    </br></br>
-    <button class="btn btn-default btn-lg" type="submit">Submit</button>    
- </form>
-</div>
- 
- 
+<h4 align="center">Generate Shopping List based off budget</h4>
+<h4 align="center">Report a price of an item</h4>
   <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="container-fluid">
     <div class="navbar-footer">
