@@ -21,7 +21,7 @@
 </head>
 <body>
 <div class="container">
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <h2 align="left"><a href="HomePage.jsp">Shop Helper</a></h2>
@@ -42,6 +42,7 @@
 <form action ="/ReportEntryStoreServlet" method="post" name="listMaker">
 <h2>Report a price</h2>
     <h3>Enter the Shop first</h3>
+    <br>
     <font size="4">
     <select name="store">
     	<%
@@ -55,13 +56,14 @@
       
     </select>
     </font>
-    </br></br>
-    <button class="btn btn-default btn-lg" type="submit">Submit</button>    
+    </br></br></br></br></br></br>
+    <button class="btn btn-default btn-lg" type="submit">Submit</button>   
+    <br><br> 
  </form>
 </div>
  
  
-  <nav class="navbar navbar-default navbar-fixed-bottom">
+  <nav class="navbar navbar-default navbar-static-bottom">
   <div class="container-fluid">
     <div class="navbar-footer">
 

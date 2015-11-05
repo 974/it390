@@ -47,8 +47,8 @@ public class Stock {
 			lrVal = midValue-8.5;
 			hrVal = midValue+8.5;
 		}else if( midValue >= 110){
-			lrVal = midValue-15.5;
-			hrVal = midValue+15.5;
+			lrVal = midValue-14.5;
+			hrVal = midValue+14.5;
 		}
 		int numAddedToTotal = 0;
 		for (int i = 0; i < counter; i++){

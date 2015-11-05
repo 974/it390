@@ -11,7 +11,6 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">-->
 <script src="app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
@@ -21,7 +20,7 @@
 </head>
 <body>
 <div class="container">
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <h2 align="left"><a href="HomePage.jsp">Shop Helper</a></h2>
@@ -38,7 +37,7 @@
 
 
 <div>
-<form action ="/ReportEntryServlet" method="post" name="listMaker" >
+<form action ="/ReportEntryServlet" method="post" name="reportPriceAndName" onsubmit="validateNumeric();">
 	<font size="4"><h2>Report a price </h2>
 	<%
 	String val = "";
@@ -91,7 +90,7 @@
     </br></br>
     <button class="btn btn-default btn-lg" type="submit">Submit</button>  
  <%
- String s = null;
+ String s = "";
  try{
 	 s = (String)request.getAttribute("processedState");
  }catch(Exception e){
@@ -99,18 +98,40 @@
  }
  if(s !=null){
 	 if(s.equalsIgnoreCase("T")){
-		 %><h4>Price was recorded!</h4><%
+		 %><h4>Report successfully processed!</h4><%
 	 }else if(s.equalsIgnoreCase("F")){
-		 %><h4>Price could not be recorded!</h4><%
+		 %><h4>Report was not successfully processed!</h4><%
 	 }
  }
  %>  
  </form>
-
+<script>
+	function validateNumeric(){
+		var result = document.reportPriceAndName.itemP.value;
+		result = result.trim();
+		var result1 = document.reportPriceAndName.itemN.value;
+		result1=result1.trim();
+		if((result == null || isNaN(result) || result == "")&&(result1=="" || result1==null)){
+			alert("Invalid item name and price!");
+			document.getElementById("itemN").value ="n/a";
+			document.getElementById("itemP").value ="-1";
+		}
+		if(result == null || isNaN(result) || result == ""){
+			alert("Invalid Price!");
+			document.getElementById("itemN").value ="n/a";
+			document.getElementById("itemP").value ="-1";
+		}else if(result1=="" || result1==null){
+			alert("Invalid item name!");
+			document.getElementById("itemN").value ="n/a";
+			document.getElementById("itemP").value ="-1";
+		}
+	}
+</script>
+<br><br><br>
 </div>
  
  
-  <nav class="navbar navbar-default navbar-fixed-bottom">
+  <nav class="navbar navbar-default navbar-static-bottom">
   <div class="container-fluid">
     <div class="navbar-footer">
 

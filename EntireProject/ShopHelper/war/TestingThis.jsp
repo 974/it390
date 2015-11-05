@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="container">
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <h2 align="left"><a href="HomePage.jsp">Shop Helper</a></h2>
@@ -33,8 +33,7 @@
 </nav>
 <br>
 <div>
-  
-   <form action ="/ShopHelperServlet" method="post" name="listMaker" ng-submit="shopHelper.submitBudget(budget)">
+   <form  action ="/ShopHelperServlet" method="post"  name="listMaker" method="post" onsubmit="return validateNumeric();">
     <h2>What are your shopping needs?</h2>
     <h3>Type</h3>
     <font size="4">
@@ -52,9 +51,22 @@
     </br></br>
     <button class="btn btn-default btn-lg" type="submit">Submit</button>
     </br></br>
-    
   </form>
+  
 </div>
+<script>
+	function validateNumeric(){
+		var result = document.listMaker.budget.value;
+		result = result.trim();
+		if(result == null || isNaN(result) || result == ""){
+			alert("Invalid!");
+			document.getElementById("budget").value ="Invalid number!";
+			return false;
+		}else{
+			return true;
+		}
+	}
+</script>
   
   <h2>Your List:</h2>
   <p>
@@ -128,8 +140,7 @@
 	  %></td><%
 	  %></tr><%
   }
-  %> </tbody><%
-  %></table> <%
+
   %><h4> <%out.println(s[idx]);%></h4> <%
   }catch(NullPointerException e){
 	  e.printStackTrace();
@@ -137,10 +148,10 @@
 	  k.printStackTrace();
   }
   %>
- 
- </p>
-  </form>
-  <nav class="navbar navbar-default navbar-fixed-bottom">
+    </tbody>
+  </table> 
+<br><br><br>
+  <nav class="navbar navbar-default navbar-static-bottom">
   <div class="container-fluid">
     <div class="navbar-footer">
 

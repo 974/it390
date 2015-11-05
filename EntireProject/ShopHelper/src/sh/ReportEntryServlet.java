@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import jdodb.Item;
 import jdodb.PMF;
@@ -26,19 +27,47 @@ public class ReportEntryServlet extends HttpServlet{
 		double num = 0;
 		try{
 			sn = req.getParameter("storeN").trim();
-			ip = req.getParameter("itemP").trim();
 			in = req.getParameter("itemN").trim();
-			if ((ip == null) || ip.equals("")){
+			ip = req.getParameter("itemP").trim();
+			
+			if ((ip == null) || ip.equals("") || in.equals("")){
 				processedState = "F";
-				req.setAttribute("processedState", processedState);
-			    req.getRequestDispatcher("ReportEntryItemNameAndPrice.jsp").forward(req, resp);
+				System.out.println("got here");
+				//req.setAttribute("processedState", processedState);
+			    //req.getRequestDispatcher("ReportEntryItemNameAndPrice.jsp").forward(req, resp);
+			    throw new NumberFormatException ("Invalid price!");
+			}System.out.println("got ehre");
+			for(int i = 0; i < ip.length();i++){
+				if(ip.charAt(i) == '-'){
+					processedState = "F";
+					//req.setAttribute("processedState", processedState);
+				    //req.getRequestDispatcher("ReportEntryItemNameAndPrice.jsp").forward(req, resp);
+				    throw new NumberFormatException ("Invalid price!");
+				}
+				if(Character.isAlphabetic(ip.charAt(i))){
+					processedState = "F";
+					//req.setAttribute("processedState", processedState);
+				    //req.getRequestDispatcher("ReportEntryItemNameAndPrice.jsp").forward(req, resp);
+				    throw new NumberFormatException ("Invalid price!");
+				}
 			}
 			num = Double.parseDouble(ip);
+			processedState = "T";
 		}catch(NumberFormatException e){
-			e.printStackTrace();
+			processedState = "F";
+			ip="";
+			in="";
+		}catch(NullPointerException e){
+			processedState = "F";
+			ip="";
+			in="";
 		}
-		processedState = createEntry(sn,in,num);
-
+		if(!processedState.equals("F")){
+			processedState = createEntry(sn,in,num);
+		}else{
+			processedState="F";
+		}
+		
 		try{
 			req.setAttribute("processedState", processedState);
 			req.setAttribute("storeNa", sn);

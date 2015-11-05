@@ -46,14 +46,15 @@ public class ShopHelperServlet extends HttpServlet {
 		}catch(NullPointerException e){
 			System.out.println("Error!");
 		}
+		ShoppingList newSL = null;
 		try{
 			String convertMe = req.getParameter("budget").trim();
 			if ((convertMe == null) || convertMe.equals("")){convertMe = "0";}
 			double num = Double.parseDouble(convertMe);
+			newSL = new GenerateShopList().generateList(Double.parseDouble(req.getParameter("budget")),req.getParameter("options"));
 		}catch(NumberFormatException e){
 			e.printStackTrace();
 		}
-		ShoppingList newSL = new GenerateShopList().generateList(Double.parseDouble(req.getParameter("budget")),req.getParameter("options"));
 	    //String output = newSL.toString();
 	    //String outputs [] = newSL.createStringOutputs();
 		try{

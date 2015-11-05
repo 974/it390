@@ -1,7 +1,6 @@
 package sh;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.ServletException;
@@ -10,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
 import jdodb.PMF;
 import jdodb.Store;
 
+@SuppressWarnings("serial")
 public class ReportEntryStoreServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		

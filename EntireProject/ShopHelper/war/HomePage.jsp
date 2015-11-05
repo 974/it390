@@ -20,7 +20,8 @@
 <title>Shop Helper</title>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
+<div class="container">
+<nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <h2 align="left"><a href="HomePage.jsp">Shop Helper</a></h2>
@@ -46,7 +47,7 @@
 
 <h4 align="center">Generate Shopping List based off budget</h4>
 <h4 align="center">Report a price of an item</h4>
-  <nav class="navbar navbar-default navbar-fixed-bottom">
+  <nav class="navbar navbar-default navbar-static-bottom">
   <div class="container-fluid">
     <div class="navbar-footer">
 
