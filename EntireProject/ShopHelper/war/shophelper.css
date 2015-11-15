@@ -43,5 +43,19 @@ a:active {
 }
 
 
+.btn {
+  background-color:#5af;
+  color:#fff;
+}
+
+.navbar ul {
+  padding-left: 30px;
+}
+
+.navbar li {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+}
 
 

@@ -6,6 +6,11 @@
 <%@page import="java.util.NoSuchElementException" %>
 <%@page import="jdodb.*" %>
 <%@page import="javax.jdo.*"%>
+<%@page import="sh.*"%>
+<%@ page import="com.google.appengine.api.users.User" %>
+<%@ page import="com.google.appengine.api.users.UserService" %>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,21 +29,45 @@
   <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <h2 align="left"><a href="HomePage.jsp">Shop Helper</a></h2>
+      <h2><a href="HomePage.jsp">Shop Helper</a></h2>
+    </div>
       <ul class="nav navbar-nav">
       	<li><h4 align="center"><a href="HomePage.jsp">Home</a></h4></li>
       	<li> <h4 align="center"><a href="TestingThis.jsp">Budget Shopping</a></h4></li>
       	<li><h4 align="center"><a href="ReportEntryPage.jsp">Report price</a></h4></li>
       </ul>
+     	<%UserService userService = UserServiceFactory.getUserService(); %>
+ <% 
+User user = userService.getCurrentUser();
+    if (user != null){
+        pageContext.setAttribute("user", user);
+    
+%>
+<div class="navbar-form navbar-right"><br>
+<h4 align="right"><a href="Account.jsp">My Account</a></h4><h4 align="right"><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">(Sign out) </a></h4>
+<%
 
-    </div>
-  </div>
+		if(ProcessUser.userExists(user)==false){
+				ProcessUser.userCreateAccount(user);
+		}
+    }else{
+%>
+											      
+<br>
+<h4 align="right">
+    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
+    </h4>
+<%
+    }
+%>
+
+</div>
 </nav>
 
 
   <br>
-<div>
-
+<!-- remove div surrounding form -->
+<%if (user!=null){ %>
 <form action ="/ReportEntryStoreServlet" method="post" name="listMaker">
 <h2>Report a price</h2>
     <h3>Enter the Shop first</h3>
@@ -60,9 +89,9 @@
     <button class="btn btn-default btn-lg" type="submit">Submit</button>   
     <br><br> 
  </form>
-</div>
- 
- 
+<%}else{ %>
+ <h3>Must be logged in to report a price</h3>
+ <%} %>
   <nav class="navbar navbar-default navbar-static-bottom">
   <div class="container-fluid">
     <div class="navbar-footer">

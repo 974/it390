@@ -12,13 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 import jdodb.Item;
 import jdodb.PMF;
 import jdodb.ReportEntry;
 import jdodb.ShoppingList;
 import jdodb.Stock;
 import jdodb.Store;
-import jdodb.User;
+import jdodb.UserAccount;
 
 public class ReportEntryServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -83,11 +87,14 @@ public class ReportEntryServlet extends HttpServlet{
 	public String createEntry(String sn, String in, double num){
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		//Find test user ID
-		Query findUser = pm.newQuery("select from " + User.class.getName() + " where userName == findMe");
-		findUser.declareParameters("String findMe");
-		List <User> userID = (List<User>)findUser.execute("Jack");
+		UserService userService = UserServiceFactory.getUserService(); 
+		User user = userService.getCurrentUser();
+		List <UserAccount> userID=null;
+		if(user!=null){
+			Query findUser = pm.newQuery("select from " + UserAccount.class.getName() + " where userName == findMe");
+			findUser.declareParameters("String findMe");
+			userID = (List<UserAccount>)findUser.execute(user.getEmail());
+		}
 		
 		//Find store ID
 		String storeID = null;
@@ -124,7 +131,11 @@ public class ReportEntryServlet extends HttpServlet{
 		ReportEntry re = null;
 		for (Stock me : extent3) {
 			if (me.getStoreID().equalsIgnoreCase(storeID) && me.getItemID().equalsIgnoreCase(itemID)){
-				re = new ReportEntry(me.getCombineStoreAndItemID(),userID.get(0).getUserID(),num);
+				if(user==null){
+					re = new ReportEntry(me.getCombineStoreAndItemID(),null,num);
+				}else{
+					re = new ReportEntry(me.getCombineStoreAndItemID(),userID.get(0).getUserID(),num);
+				}
 				pm.makePersistent(re);
 				me.addItemPrice(num);
 				extent3.closeAll();

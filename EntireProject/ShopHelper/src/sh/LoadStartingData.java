@@ -16,7 +16,7 @@ import jdodb.ShoppingList;
 import jdodb.Stock;
 import jdodb.Store;
 import jdodb.Template;
-import jdodb.User;
+import jdodb.UserAccount;
 
 import java.util.List;
 
@@ -44,10 +44,6 @@ public class LoadStartingData extends HttpServlet{
 			pm.makePersistent(t1);			
 			pm.makePersistent(t2);
 			pm.makePersistent(t3);
-			User u = new User("Jack");
-			User u1 = new User("Ian");
-			pm.makePersistent(u);
-			pm.makePersistent(u1);	
 			Item i = new Item("10 pound turkey",t1.getTypeID());
 			Item i13 = new Item("Jellied Cranberry sauce 14 oz",t1.getTypeID());
 			Item i1 = new Item("Stuffing 2 lb",t1.getTypeID());
@@ -255,7 +251,8 @@ public class LoadStartingData extends HttpServlet{
 			l1.add(o1);
 			l1.add(o2);
 			l1.add(o3);
-			ShoppingList shpLst = new ShoppingList(15,15,u.getUserID(),l1);
+			//changed from u.getUserID() to null
+			ShoppingList shpLst = new ShoppingList(15,15,null,l1);
 			pm.makePersistent(shpLst);
 		}finally{
 			pm.close();

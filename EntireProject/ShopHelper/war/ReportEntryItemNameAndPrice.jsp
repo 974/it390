@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@page import="jdodb.ShoppingList" %>
 <%@page import="java.util.Scanner" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.NoSuchElementException" %>
 <%@page import="jdodb.*" %>
+<%@page import="sh.*" %>
 <%@page import="javax.jdo.*"%>
+<%@ page import="com.google.appengine.api.users.User" %>
+<%@ page import="com.google.appengine.api.users.UserService" %>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,26 +23,53 @@
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="shophelper.css">
 <title>Shop Helper</title>
+
 </head>
 <body>
 <div class="container">
-<nav class="navbar navbar-default navbar-static-top">
+  <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <h2 align="left"><a href="HomePage.jsp">Shop Helper</a></h2>
+      <h2><a href="HomePage.jsp">Shop Helper</a></h2>
+    </div>
       <ul class="nav navbar-nav">
       	<li><h4 align="center"><a href="HomePage.jsp">Home</a></h4></li>
       	<li> <h4 align="center"><a href="TestingThis.jsp">Budget Shopping</a></h4></li>
       	<li><h4 align="center"><a href="ReportEntryPage.jsp">Report price</a></h4></li>
       </ul>
+     	<%UserService userService = UserServiceFactory.getUserService(); %>
+ <% 
+User user = userService.getCurrentUser();
+    if (user != null){
+        pageContext.setAttribute("user", user);
+    
+%>
+<div class="navbar-form navbar-right"><br>
+<h4 align="right"><a href="Account.jsp">My Account</a></h4><h4 align="right"><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">(Sign out) </a></h4>
+<%
 
-    </div>
-  </div>
+		if(ProcessUser.userExists(user)==false){
+				ProcessUser.userCreateAccount(user);
+		}
+    }else{
+%>
+											      
+<br>
+<h4 align="right" onload="redir()">
+    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
+    </h4>
+<%
+    }
+%>
+
+</div>
 </nav>
 <br>
 
+<%if(user==null){ %>
+<c:redirect url="/ReportEntryPage.jsp"/>
 
-<div>
+<%}else{ %>
 <form action ="/ReportEntryServlet" method="post" name="reportPriceAndName" onsubmit="validateNumeric();">
 	<font size="4"><h2>Report a price </h2>
 	<%
@@ -127,8 +160,8 @@
 		}
 	}
 </script>
+<%} %>
 <br><br><br>
-</div>
  
  
   <nav class="navbar navbar-default navbar-static-bottom">

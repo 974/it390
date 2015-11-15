@@ -2,11 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="jdodb.ShoppingList" %>
 <%@page import="java.util.Scanner" %>
-<%@page import="java.util.List"%>
+<%@page import="sh.*" %>
 <%@page import="java.util.NoSuchElementException" %>
-<%@page import="jdodb.*" %>
-<%@page import="javax.jdo.*"%>
-<%@page import="sh.*"%>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
@@ -16,8 +13,6 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">-->
-<script src="app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
@@ -50,7 +45,7 @@ User user = userService.getCurrentUser();
 		if(ProcessUser.userExists(user)==false){
 				ProcessUser.userCreateAccount(user);
 		}
-    }else{
+}else{
 %>
 											      
 <br>
@@ -63,20 +58,19 @@ User user = userService.getCurrentUser();
 
 </div>
 </nav>
- <br>
- <br>
- <br>
- <br>
- <br>
- 
- <h4>Under Construction</h4>
-<h2 align="center">Shopping Made Easy</h2>
-<br>  
+<%if(user!=null){ %>
+<h2 align="center">Welcome, ${fn:escapeXml(user.nickname)}!</h2>
+<h3 align="center">What would you like to do? </h3>
+<button type="button" onclick="location.href='ViewShoppingList.jsp';" >View Shopping lists generated</button>
+<br>
+<%}else{ %>
+<h2 align="center">Please Log in to view your account!</h2>
+<%} %>
+<br>
+<br>
 
-<h3>Get started by choosing one of the below options from the navigation bar:</h3>
 
-<h4 align="center">Generate Shopping List based off budget</h4>
-<h4 align="center">Report a price of an item</h4>
+<br><br><br>
   <nav class="navbar navbar-default navbar-static-bottom">
   <div class="container-fluid">
     <div class="navbar-footer">

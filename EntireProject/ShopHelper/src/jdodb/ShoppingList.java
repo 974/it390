@@ -42,7 +42,7 @@ public class ShoppingList {
 	@Persistent
 	private String type;
 	@Persistent
-	private ArrayList <ListItem> shoppingList= new ArrayList<ListItem>();
+	private ArrayList <ListItem> shoppingList = new ArrayList<ListItem>();
 	
 	public String getUserID(){return userID;}
 	public String getShopListID(){return shopListID;}
@@ -63,57 +63,34 @@ public class ShoppingList {
 		int counter = 0;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		String displayStrings [] = new String[MAX_LINES];
-		displayStrings[counter++] =  "Budget:$" + budget + "\n";
-		displayStrings[counter++] =  "Type: " + type + "\n";
+		displayStrings[counter++] =  "Budget:$" + budget + "\n"; //pos 0
+		displayStrings[counter++] =  "Type: " + type + "\n";// pos 1
 		//String displayMe = "Budget:$" + budget + "     Type: " + type + "\n";
-		String JSONVer;
-		JSONObject obj = new JSONObject();
-		int stringIncr = 0;
-		try {
-			obj.put("username","Jack");
-			obj.put("budget", new Double(budget));
-			obj.put("total",new Double(totalCost));
-			obj.put("type", type);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+
 		for (ListItem i : shoppingList){
 			Query findItemIDInStock = pm.newQuery("select from " + Stock.class.getName() + " where combineStoreAndItemID == findMe");
 			findItemIDInStock.declareParameters("String findMe");
+			@SuppressWarnings("unchecked")
 			List <Stock> results = (List<Stock>)findItemIDInStock.execute(i.getCombineStoreAndItemID());
 			for (Stock s1 : results){
 				//Find Item name and append name, price, and quantity
 				Query findItemName = pm.newQuery("select from " +Item.class.getName() + " where itemID == findMe");
 				findItemName.declareParameters("String findMe");
+				@SuppressWarnings("unchecked")
 				List <Item> results1 = (List<Item>)findItemName.execute(s1.getItemID());
 				//Changed from s1.getItemPrice() to s1.getItemAveragePrice()
 				displayStrings[counter] = "Item name: " +results1.get(0).getItemName() + ";Average Reported Price: $" + String.format("%.2f", s1.getItemAveragePrice()) + ";Quantity: " + i.getQuantity();
-				try {
-					obj.put("itemname" + stringIncr, results1.get(0).getItemName());
-					//Changed from s1.getItemPrice() to s1.getItemAveragePrice()
-					obj.put("itemprice" + stringIncr, s1.getItemAveragePrice());
-					obj.put("itemquantity" + stringIncr, i.getQuantity());
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
 				//Find Store and append its name
 				Query findItemStore = pm.newQuery("select from " + Store.class.getName() + " where storeID == findMe");
 				findItemStore.declareParameters("String findMe");
+				@SuppressWarnings("unchecked")
 				List <Store> results2 = (List<Store>)findItemStore.execute(s1.getStoreID());
 				displayStrings[counter] += ";Store name: " + results2.get(0).getStoreName() + "\n";
 				counter++;
-				try {
-					obj.put("storename" + stringIncr, results2.get(0).getStoreName());
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				stringIncr++;
 			}
 		}
 		displayStrings[counter++] = "Total: $" + String.format("%.2f",totalCost) + "\n";
 		pm.close();
-		//return obj.toString();
-		//return displayMe;
 		return displayStrings;
 		
 	}

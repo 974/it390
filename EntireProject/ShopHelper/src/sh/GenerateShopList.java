@@ -6,20 +6,22 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.google.appengine.api.users.User;
+
 import jdodb.Item;
 import jdodb.ListItem;
 import jdodb.PMF;
 import jdodb.ShoppingList;
 import jdodb.Stock;
 import jdodb.Store;
-import jdodb.User;
+import jdodb.UserAccount;
 
 public class GenerateShopList {
-	public ShoppingList generateList(double budget, String type){
+	public ShoppingList generateList(double budget, String type, User curUser){
 		ShoppingList s = new ShoppingList();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		String typeIDWeNeed = null;
-		//new
+
 		String name = "";
 		if (type.equalsIgnoreCase("thanksgiving dinner10")){
 			if (budget < 80){
@@ -142,16 +144,19 @@ public class GenerateShopList {
 				}
 			}
 		}
-
-		//for (ListItem i : items){
-		//	pm.makePersistent(i);
-		//}
-		Query findUser = pm.newQuery("select from " + User.class.getName() + " where userName == findMe");
-		findUser.declareParameters("String findMe");
-		List <User> results3 = (List<User>)findUser.execute("Jack");
-		ShoppingList newShopList = new ShoppingList(budget,total, results3.get(0).getUserID(),items);
-		newShopList.setType(type);
-		pm.makePersistent(newShopList);
+		ShoppingList newShopList=null;
+		if(curUser != null){
+			Query findUser = pm.newQuery("select from " + UserAccount.class.getName() + " where userName == findMe");
+			findUser.declareParameters("String findMe");
+			List <UserAccount> results3 = (List<UserAccount>)findUser.execute(curUser.getEmail());
+			newShopList = new ShoppingList(budget,total, results3.get(0).getUserID(),items);
+			newShopList.setType(type);
+			pm.makePersistent(newShopList);
+		}else{
+			newShopList = new ShoppingList(budget,total, null,items);
+			newShopList.setType(type);
+			pm.makePersistent(newShopList);
+		}
 		pm.close();
 				
 		//Display possible items to choose from

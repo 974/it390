@@ -18,10 +18,14 @@ import jdodb.Stock;
 import jdodb.Store;
 
 
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.Template;
@@ -38,6 +42,8 @@ public class ShopHelperServlet extends HttpServlet {
 			throws IOException, ServletException {
 		Store s = Store.searchForStore("Wegmans");
 		
+	    UserService userService = UserServiceFactory.getUserService();
+	    User currentUser = userService.getCurrentUser();
 		try{
 			if(s == null){
 				LoadStartingData.loadData();
@@ -51,7 +57,7 @@ public class ShopHelperServlet extends HttpServlet {
 			String convertMe = req.getParameter("budget").trim();
 			if ((convertMe == null) || convertMe.equals("")){convertMe = "0";}
 			double num = Double.parseDouble(convertMe);
-			newSL = new GenerateShopList().generateList(Double.parseDouble(req.getParameter("budget")),req.getParameter("options"));
+			newSL = new GenerateShopList().generateList(Double.parseDouble(req.getParameter("budget")),req.getParameter("options"),currentUser);
 		}catch(NumberFormatException e){
 			e.printStackTrace();
 		}
