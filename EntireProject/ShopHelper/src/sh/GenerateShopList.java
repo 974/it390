@@ -17,7 +17,7 @@ import jdodb.Store;
 import jdodb.UserAccount;
 
 public class GenerateShopList {
-	public ShoppingList generateList(double budget, String type, User curUser){
+	public ShoppingList generateList(double budget, String type, User curUser, String n){
 		ShoppingList s = new ShoppingList();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		String typeIDWeNeed = null;
@@ -149,11 +149,11 @@ public class GenerateShopList {
 			Query findUser = pm.newQuery("select from " + UserAccount.class.getName() + " where userName == findMe");
 			findUser.declareParameters("String findMe");
 			List <UserAccount> results3 = (List<UserAccount>)findUser.execute(curUser.getEmail());
-			newShopList = new ShoppingList(budget,total, results3.get(0).getUserID(),items);
+			newShopList = new ShoppingList(budget,total, results3.get(0).getUserID(),items,n);
 			newShopList.setType(type);
 			pm.makePersistent(newShopList);
 		}else{
-			newShopList = new ShoppingList(budget,total, null,items);
+			newShopList = new ShoppingList(budget,total, null,items,null);
 			newShopList.setType(type);
 			pm.makePersistent(newShopList);
 		}

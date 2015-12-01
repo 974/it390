@@ -27,42 +27,38 @@
 </head>
 <body>
 <div class="container">
-  <nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <h2><a href="HomePage.jsp">Shop Helper</a></h2>
     </div>
+    <div>
       <ul class="nav navbar-nav">
-      	<li><h4 align="center"><a href="HomePage.jsp">Home</a></h4></li>
-      	<li> <h4 align="center"><a href="TestingThis.jsp">Budget Shopping</a></h4></li>
-      	<li><h4 align="center"><a href="ReportEntryPage.jsp">Report price</a></h4></li>
+        <li><a href="HomePage.jsp">Home</a></li>
+        <li><a href="TestingThis.jsp">Budget Shopping</a></li>
+        <li><a href="ReportEntryPage.jsp">Report Price</a></li> 
       </ul>
-     	<%UserService userService = UserServiceFactory.getUserService(); %>
- <% 
-User user = userService.getCurrentUser();
-    if (user != null){
-        pageContext.setAttribute("user", user);
+      <ul class="nav navbar-nav navbar-right">
+      <%UserService userService = UserServiceFactory.getUserService(); 
+ 
+		User user = userService.getCurrentUser();
+   		if (user != null){
+        	pageContext.setAttribute("user", user);
     
-%>
-<div class="navbar-form navbar-right"><br>
-<h4 align="right"><a href="Account.jsp">My Account</a></h4><h4 align="right"><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">(Sign out) </a></h4>
-<%
-
-		if(ProcessUser.userExists(user)==false){
+	  %>
+        <li><a href="Account.jsp"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+        <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>"><span class="glyphicon glyphicon-log-in"></span>  Sign Out</a></li>
+        <%		
+        	if(ProcessUser.userExists(user)==false){
 				ProcessUser.userCreateAccount(user);
-		}
-    }else{
-%>
-											      
-<br>
-<h4 align="right" onload="redir()">
-    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-    </h4>
-<%
-    }
-%>
-
-</div>
+			}
+		}else{ 
+		%>
+		 <li><a href="<%= userService.createLoginURL(request.getRequestURI()) %>"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+	  <%} %>
+      </ul>
+    </div>
+  </div>
 </nav>
 <br>
 

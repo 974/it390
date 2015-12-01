@@ -28,45 +28,42 @@
     <div class="navbar-header">
       <h2><a href="HomePage.jsp">Shop Helper</a></h2>
     </div>
+    <div>
       <ul class="nav navbar-nav">
-      	<li><h4 align="center"><a href="HomePage.jsp">Home</a></h4></li>
-      	<li> <h4 align="center"><a href="TestingThis.jsp">Budget Shopping</a></h4></li>
-      	<li><h4 align="center"><a href="ReportEntryPage.jsp">Report price</a></h4></li>
+        <li><a href="HomePage.jsp">Home</a></li>
+        <li><a href="TestingThis.jsp">Budget Shopping</a></li>
+        <li><a href="ReportEntryPage.jsp">Report Price</a></li> 
       </ul>
-     	<%UserService userService = UserServiceFactory.getUserService(); %>
- <% 
-User user = userService.getCurrentUser();
-    if (user != null){
-        pageContext.setAttribute("user", user);
+      <ul class="nav navbar-nav navbar-right">
+      <%UserService userService = UserServiceFactory.getUserService(); 
+ 
+		User user = userService.getCurrentUser();
+   		if (user != null){
+        	pageContext.setAttribute("user", user);
     
-%>
-<div class="navbar-form navbar-right"><br>
-<h4 align="right"><a href="Account.jsp">My Account</a></h4><h4 align="right"><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">(Sign out) </a></h4>
-<%
-
-		if(ProcessUser.userExists(user)==false){
+	  %>
+        <li><a href="Account.jsp"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+        <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>"><span class="glyphicon glyphicon-log-in"></span>  Sign Out</a></li>
+        <%		
+        	if(ProcessUser.userExists(user)==false){
 				ProcessUser.userCreateAccount(user);
-		}
-    }else{
-%>
-											      
-<br>
-<h4 align="right">
-    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-    </h4>
-<%
-    }
-%>
-
-</div>
+			}
+		}else{ 
+		%>
+		 <li><a href="<%= userService.createLoginURL(request.getRequestURI()) %>"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+	  <%} %>
+      </ul>
+    </div>
+  </div>
 </nav>
+
 <br>
 <div>
    <form  action ="/ShopHelperServlet" method="post"  name="listMaker" method="post" onsubmit="return validateNumeric();">
     <h2>What are your shopping needs?</h2>
     <h3>Type</h3>
     <font size="4">
-    <select name="options" ng-model="shopHelper.options">
+    <select name="options">
        <option value="continental breakfast2">Continental Breakfast for one week(~2 people)</option>
       <option value="thanksgiving dinner10">Thanksgiving Dinner(~10 people)</option>
       <option value="back to school clothes2">Back-to-school Clothes(~2 people)</option>
@@ -75,8 +72,9 @@ User user = userService.getCurrentUser();
     </br></br>
     <h3>Budget</h3>
     <font size="4">
-    <input ng-model="userBudget" type="text" name="budget" autocomplete="off"></font>
+    <input type="text" name="budget" autocomplete="off"></font>
     
+    <%if(user!=null){ %></br></br><h3>Shopping List Name</h3><font size="4"><input type="text" name="shopListName" autocomplete="off"></font><%} %>
     </br></br>
     <button class="btn btn-default btn-lg" type="submit">Submit</button>
     </br></br>

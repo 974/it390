@@ -241,19 +241,19 @@ public class LoadStartingData extends HttpServlet{
 			pm.makePersistent(as47);
 			pm.makePersistent(as48);
 			
-			ArrayList <ListItem> l1= new <ListItem>ArrayList();
-			ListItem o1 = new ListItem(2,as.getCombineStoreAndItemID());
-			ListItem o2 = new ListItem(2,as.getCombineStoreAndItemID());
-			ListItem o3 = new ListItem(1,as6.getCombineStoreAndItemID());
-			pm.makePersistent(o1);
-			pm.makePersistent(o2);
-			pm.makePersistent(o3);
-			l1.add(o1);
-			l1.add(o2);
-			l1.add(o3);
-			//changed from u.getUserID() to null
-			ShoppingList shpLst = new ShoppingList(15,15,null,l1);
-			pm.makePersistent(shpLst);
+//			ArrayList <ListItem> l1= new <ListItem>ArrayList();
+//			ListItem o1 = new ListItem(2,as.getCombineStoreAndItemID());
+//			ListItem o2 = new ListItem(2,as.getCombineStoreAndItemID());
+//			ListItem o3 = new ListItem(1,as6.getCombineStoreAndItemID());
+//			pm.makePersistent(o1);
+//			pm.makePersistent(o2);
+//			pm.makePersistent(o3);
+//			l1.add(o1);
+//			l1.add(o2);
+//			l1.add(o3);
+//			//changed from u.getUserID() to null
+//			ShoppingList shpLst = new ShoppingList(15,15,null,l1);
+//			pm.makePersistent(shpLst);
 		}finally{
 			pm.close();
 		}

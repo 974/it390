@@ -19,12 +19,13 @@ import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 @PersistenceCapable
 public class ShoppingList {
-	public ShoppingList(double bud, double total, String user, ArrayList <ListItem>list){
+	public ShoppingList(double bud, double total, String user, ArrayList <ListItem>list, String n){
 		setBudget(bud);
 		setTotalCost(total);
 		userID = user;
 		shoppingList = list;
 		type = null;
+		name = n;
 	}
 	public ShoppingList(){}
 	@ForeignKey
@@ -43,6 +44,8 @@ public class ShoppingList {
 	private String type;
 	@Persistent
 	private ArrayList <ListItem> shoppingList = new ArrayList<ListItem>();
+	@Persistent
+	private String name;
 	
 	public String getUserID(){return userID;}
 	public String getShopListID(){return shopListID;}
@@ -51,13 +54,14 @@ public class ShoppingList {
 	public double getBudget(){return budget;}
 	public double getTotalCost(){return totalCost;}
 	public String getType(){return type;}
+	public String getName(){return name;}
 	
 	public void setBudget(double num){budget=num;}
 	public void setTotalCost(double num){totalCost = num;}
 	public void addToTotalCost(double num){totalCost += num;}
 	public void addItemToShoppingList(ListItem item){shoppingList.add(item);}
 	public void setType(String t){type = t;}
-	
+	public void setName(String n){name=n;}
 	public String [] createStringOutputs(){
 		final int MAX_LINES = 500;
 		int counter = 0;

@@ -57,12 +57,15 @@ public class ShopHelperServlet extends HttpServlet {
 			String convertMe = req.getParameter("budget").trim();
 			if ((convertMe == null) || convertMe.equals("")){convertMe = "0";}
 			double num = Double.parseDouble(convertMe);
-			newSL = new GenerateShopList().generateList(Double.parseDouble(req.getParameter("budget")),req.getParameter("options"),currentUser);
+			if(currentUser != null){
+				newSL = new GenerateShopList().generateList(Double.parseDouble(req.getParameter("budget")),req.getParameter("options"),currentUser,req.getParameter("shopListName"));
+			}else{
+				newSL = new GenerateShopList().generateList(Double.parseDouble(req.getParameter("budget")),req.getParameter("options"),currentUser,null);
+			}
+			
 		}catch(NumberFormatException e){
 			e.printStackTrace();
 		}
-	    //String output = newSL.toString();
-	    //String outputs [] = newSL.createStringOutputs();
 		try{
 			req.setAttribute("outputList", newSL);
 		    req.getRequestDispatcher("TestingThis.jsp").forward(req, resp);
