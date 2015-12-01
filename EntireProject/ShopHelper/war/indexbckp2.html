@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en" data-ng-app>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="serverRequests.js"></script>
+<script src="app.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<div ng-app="app" ng-controller="shopHelper as shop" class="container">
+  <h1>Shop Helper</h1>
+  
+  <h2>What are your shopping needs?</h2>
+  <!--  Added action and method in form tag for demo -->
+  <form action ="/ShopHelperServlet" method="post" name="listMaker" ng-submit="shopHelper.submitBudget(budget)">
+    <h3>Budget</h3>
+    <input ng-model="userBudget" type="text" name="budget">
+    </br></br>
+    <select name="options" ng-model="shopHelper.options">
+      <option value="food">Food</option>
+      <option value="clothing">Clothing</option>
+      <option value="party">Party</option>
+    </select>
+    </br></br>
+    <button class="btn btn-default btn-lg" type="submit">Submit</button>
+    </br></br>
+    <!--  Commented out until it functions -->
+   <!--   <p>You selected {{shopHelper.options}} and your budget is {{shopHelper.budget}}</p>--> 
+  </form>
+  <h2>Your List:</h2>
+  <ul>
+  <!--  Commented out until it functions -->
+    <!--  <li ng-repeat="item in list.selected">{{item.itemName}} {{stock.setItemPrice}} {{store.storeName}} {{store.storeStreet}} {{store.storeZip}}</li>
+  	-->
+  </ul>
+  
+</div>
+</body>
+</html>

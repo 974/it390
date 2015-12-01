@@ -1,0 +1,20 @@
+body {
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  background-color:#fff;
+  padding-top: 70px; 
+}
+
+h1, h2, h3 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.navbar {
+  background-color:#5af;
+  color:#fff;
+}
+
+.btn {
+  background-color:#5af;
+  color:#fff;
+}

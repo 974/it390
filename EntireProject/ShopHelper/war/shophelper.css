@@ -1,0 +1,47 @@
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  text-align: center;
+  background-color:#fff;
+  background-image:url('lined_paper_@2X.png');
+  padding-top: 70px; 
+}
+
+h1, h2, h3{
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+.navbar {
+  background-color:#5af;
+  color:#fff;
+}
+
+.btn {
+  background-color:#5af;
+  color:#fff;
+}
+a {
+	padding: 10px 30px;
+    color: White;
+}
+a:link {
+    color: White;
+}
+
+
+a:visited {
+    color: White;
+}
+hr {  border-top: 1px solid red;}
+
+a:hover {
+    color: White;
+}
+
+
+a:active {
+    color:White;
+}
+
+
+
+
