@@ -46,7 +46,7 @@
         	pageContext.setAttribute("user", user);
     
 	  %>
-        <li><a href="Account.jsp"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+        <li><a href="Account.jsp"><span class="glyphicon glyphicon-user"></span> ${fn:escapeXml(user.nickname)}</a></li>
         <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>"><span class="glyphicon glyphicon-log-in"></span>  Sign Out</a></li>
         <%		
         	if(ProcessUser.userExists(user)==false){

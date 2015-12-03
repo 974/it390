@@ -46,7 +46,7 @@
         	pageContext.setAttribute("user", user);
     
 	  %>
-        <li><a href="Account.jsp"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+        <li><a href="Account.jsp"><span class="glyphicon glyphicon-user"></span> ${fn:escapeXml(user.nickname)}</a></li>
         <li><a href="<%= userService.createLogoutURL(request.getRequestURI()) %>"><span class="glyphicon glyphicon-log-in"></span>  Sign Out</a></li>
         <%		
         	if(ProcessUser.userExists(user)==false){
@@ -65,9 +65,9 @@
 
 <%}%>
 <%
-PersistenceManager pm = PMF.get().getPersistenceManager();
-javax.jdo.Extent<jdodb.UserAccount> extent1 = pm.getExtent(jdodb.UserAccount.class, false);
-String locatedUserID = "";
+	PersistenceManager pm = PMF.get().getPersistenceManager();
+	javax.jdo.Extent<jdodb.UserAccount> extent1 = pm.getExtent(jdodb.UserAccount.class, false);
+	String locatedUserID = "";
 		for (jdodb.UserAccount me : extent1) {
 			if(me.getUserName().equalsIgnoreCase(user.getEmail())){
 				locatedUserID=me.getUserID();
@@ -86,7 +86,11 @@ String locatedUserID = "";
       <div class="panel-heading">
         <h4 class="panel-title" >
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%out.print(oL);%>" style="color: #003399;"><% out.print(((ShoppingList)(results.get(oL))).getName());%></a>
-        
+        	 <div align="right">
+        	 	<form  action ="/RemoveListServlet" method="post"  name="deleteList" onsubmit="return confirmDeletion();">
+        	 		<button type="submit" value="<%out.print(((ShoppingList)(results.get(oL))).getShopListID());%>"  name="deleteMe">Delete</button>
+        		</form>
+        	 </div>
         </h4>
       </div>
       <div id="collapse<%out.print(oL);%>" class="panel-collapse collapse in">
@@ -185,22 +189,16 @@ String locatedUserID = "";
 
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script>
+	function confirmDeletion(){
+		var r = confirm("Are you sure you want to delete the shopping list?");
+		if (r == true) {
+		   	return true;
+		} else {
+		    return false;
+		}
+	}
+</script>
 
 <br><br><br>
   <nav class="navbar navbar-default navbar-static-bottom">

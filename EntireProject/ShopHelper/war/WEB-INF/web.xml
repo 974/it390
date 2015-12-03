@@ -42,7 +42,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>ReportEntryStoreServlet</servlet-name>
 		<url-pattern>/ReportEntryStoreServlet</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>RemoveListServlet</servlet-name>
+		<servlet-class>sh.RemoveListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>RemoveListServlet</servlet-name>
+		<url-pattern>/RemoveListServlet</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>HomePage.jsp</welcome-file>
 	</welcome-file-list>
