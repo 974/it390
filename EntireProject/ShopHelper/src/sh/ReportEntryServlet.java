@@ -36,22 +36,15 @@ public class ReportEntryServlet extends HttpServlet{
 			
 			if ((ip == null) || ip.equals("") || in.equals("")){
 				processedState = "F";
-				System.out.println("got here");
-				//req.setAttribute("processedState", processedState);
-			    //req.getRequestDispatcher("ReportEntryItemNameAndPrice.jsp").forward(req, resp);
 			    throw new NumberFormatException ("Invalid price!");
-			}System.out.println("got ehre");
+			}
 			for(int i = 0; i < ip.length();i++){
 				if(ip.charAt(i) == '-'){
 					processedState = "F";
-					//req.setAttribute("processedState", processedState);
-				    //req.getRequestDispatcher("ReportEntryItemNameAndPrice.jsp").forward(req, resp);
 				    throw new NumberFormatException ("Invalid price!");
 				}
 				if(Character.isAlphabetic(ip.charAt(i))){
 					processedState = "F";
-					//req.setAttribute("processedState", processedState);
-				    //req.getRequestDispatcher("ReportEntryItemNameAndPrice.jsp").forward(req, resp);
 				    throw new NumberFormatException ("Invalid price!");
 				}
 			}

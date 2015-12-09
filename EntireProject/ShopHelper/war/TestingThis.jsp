@@ -11,15 +11,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-<script src="app.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="shophelper.css">
-<title>Shop Helper</title>
+<title>Shop Helper: Budget Shopping List</title>
 </head>
 <body>
 <div class="container">
@@ -170,9 +168,9 @@
 
   %><h4> <%out.println(s[idx]);%></h4> <%
   }catch(NullPointerException e){
-	  e.printStackTrace();
+	  
   }catch(NoSuchElementException k){
-	  k.printStackTrace();
+	  
   }
   %>
     </tbody>

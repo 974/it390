@@ -50,7 +50,6 @@ public class GenerateShopList {
 		}else if (type.equalsIgnoreCase("back to school clothes2")){
 			name = "Macy's";
 		}
-		//new
 		Query findStoreID = pm.newQuery("select from " + Store.class.getName() + " where storeName == findMe");
 		findStoreID .declareParameters("String findMe");
 		List <Store> r10 = (List<Store>)findStoreID .execute(name);
@@ -79,12 +78,8 @@ public class GenerateShopList {
 		javax.jdo.Extent<Stock> extent3 = pm.getExtent(Stock.class, false);
 		ArrayList <Stock> itemsToGenerateFromReduced = new <Stock>ArrayList();
 		for (Stock me : extent3) {
-			if (me.getStoreID().equalsIgnoreCase(idForStore)){
-				
-			
-			for (Item examineMe:  itemsToGenerateFrom){
-				//changed to take store into account
-				
+			if (me.getStoreID().equalsIgnoreCase(idForStore)){			
+			for (Item examineMe:  itemsToGenerateFrom){	
 				if (me.getItemID().equalsIgnoreCase(examineMe.getItemID())){
 					itemsToGenerateFromReduced.add(me);
 				}
@@ -112,7 +107,6 @@ public class GenerateShopList {
 			}else if (type.equalsIgnoreCase("back to school clothes2")){
 				randNumQuan = (int)(Math.random()*2+1);
 			}
-			//Changed from getItemPrice() to getItemAveragePrice()
 			double costForItem = randNumQuan * (itemsToGenerateFromReduced.get(randNumItem).getItemAveragePrice());
 			String itemIDToRemove = null;
 			//Check to see if the quantity makes the total go over the budget
@@ -127,7 +121,6 @@ public class GenerateShopList {
 				boolean goodQuan = false;
 				//Reduce quantity to see if we can find a suitable quantity
 				for (int i = randNumQuan; i > 0 && !goodQuan;i--){
-					//Changed from getItemPrice() to getItemAveragePrice()
 					costForItem = i * (itemsToGenerateFromReduced.get(randNumItem).getItemAveragePrice());
 					if ((costForItem + total) <= budget){
 						total += costForItem;
@@ -157,11 +150,7 @@ public class GenerateShopList {
 			newShopList.setType(type);
 			pm.makePersistent(newShopList);
 		}
-		pm.close();
-				
-		//Display possible items to choose from
-		//for (int i = 0; i < items.size();i++){System.out.println(items.get(i).getQuantity() + " Total: " + total);}
-		
+		pm.close();		
 		
 		return newShopList;
 	}
